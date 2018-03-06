@@ -2,11 +2,8 @@ version: "3"
 services:
   web:
     image: ebm1718travis/sagg:latest
-    depends_on:
-      - mongodb
     environment:
-      - APP_PORT=4000
-      - MONGODB_URI=mongodb://david:123456@ds157528.mlab.com:57528/sagg
+      - MONGODB_URI=mongodb://mongodb/sagg
     networks:
       local:
       ebm-filrouge:
@@ -16,7 +13,11 @@ services:
     image: mongo
     networks:
       - local
+    volumes:
+      - mongo-volume:/data/db
 networks:
   local:
   ebm-filrouge:
-    external: true 
+    external: true
+volumes:
+  mongo-volume:
