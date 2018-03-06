@@ -1,5 +1,5 @@
 {
-  "name": "boilerplate-backend",
+  "name": "sagg-backend",
   "version": "0.1.0",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
   ],
   "license": "MIT",
   "apidoc": {
-    "title": "ApiDoc pour le projet Boilerplate",
+    "title": "ApiDoc pour le projet SAGG",
     "url": "/api",
     "sampleUrl": "http://localhost:4000/api"
   },
@@ -27,9 +27,11 @@
     "express": "^4.16.2",
     "express-jwt": "^5.3.0",
     "jsonwebtoken": "^8.1.0",
+    "mongoose": "^5.0.9",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "serve-static": "^1.13.1"
+    "serve-static": "^1.13.1",
+    "validator": "^9.4.1"
   },
   "devDependencies": {
     "apidoc": "^0.17.6",

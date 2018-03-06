@@ -2,6 +2,9 @@ const { Router } = require('express');
 
 const router = new Router();
 
+router.use('/courses', require('./courses'));
+router.use('/attendances', require('./attendances'));
+
 /**
  * @api {get} / Hello World
  * @apiName GetHome
