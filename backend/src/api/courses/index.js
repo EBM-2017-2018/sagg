@@ -12,7 +12,6 @@ const controller = require('./courses.controller');
  * @apiGroup Static Pages
  * @apiDescription Cette URL permet de récupérer tous les cours
  *
- * @apiParamExample  {String} Request-Example:
  *
  * @apiSuccessExample {html} Success-Response:
      HTTP/1.1 200 OK
@@ -54,7 +53,14 @@ router.get('/', controller.findAll);
  * @apiGroup Static Pages
  * @apiDescription Cette URL permet d'enregister un nouveau cours
  *
- * @apiParamExample  {String} Request-Example:
+ * @apiExample Example usage:
+ *
+ *     body:
+ *     {
+ *       "id": 4711,
+ *       "name": "Peter"
+ *     }
+ *
  *
  * @apiSuccessExample {html} Success-Response:
      HTTP/1.1 201 OK
