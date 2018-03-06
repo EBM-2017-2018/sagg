@@ -54,7 +54,6 @@ router.get('/', controller.findAll);
  * @apiGroup Static Pages
  * @apiDescription Cette URL permet d'enregister un nouveau cours
  *
- * @apiBody {}
  * @apiParamExample  {String} Request-Example:
  *
  * @apiSuccessExample {html} Success-Response:
