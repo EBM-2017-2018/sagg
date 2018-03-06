@@ -12,7 +12,6 @@ const controller = require('./courses.controller');
  * @apiGroup Static Pages
  * @apiDescription Cette URL permet de récupérer tous les cours
  *
- * @apiBody {}
  * @apiParamExample  {String} Request-Example:
  *
  * @apiSuccessExample {html} Success-Response:
