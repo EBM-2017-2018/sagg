@@ -3,6 +3,12 @@ const Attendance = require('./attendance.model');
 module.exports = {};
 
 module.exports.create = (req, res) => {
+  if (!req.body) {
+    res.status(404).json({
+      code: 'MISSING_FIELDS',
+      message: 'Des champs sont manquants',
+    });
+  }
   const attendance = new Attendance(req.body);
   attendance.save((err) => {
     if (err) {
@@ -22,6 +28,12 @@ module.exports.findAll = (req, res) => {
 };
 
 module.exports.warnIsHere = (req, res) => {
+  if (!req.params.id || !req.params.uid) {
+    res.status(404).json({
+      code: 'MISSING_FIELDS',
+      message: 'Les ids sont manquants',
+    });
+  }
   Attendance.update(
     { _id: req.params.id, 'user.id': req.params.uid },
     {
