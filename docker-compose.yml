@@ -6,7 +6,7 @@ services:
       - mongodb
     environment:
       - APP_PORT=4000
-      - MONGODB_URI=mongodb://mongodb/sagg
+      - MONGODB_URI=mongodb://david:123456@ds157528.mlab.com:57528/sagg
     networks:
       local:
       ebm-filrouge:
