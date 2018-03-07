@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {List, withStyles} from 'material-ui';
 import StudentRow from "./StudentRow";
 import ControlsBlock from "./ControlsBlock";
@@ -25,11 +24,6 @@ const styles = theme => ({
 });
 
 class AttendanceSheet extends Component {
-    constructor(props){
-        super(props);
-    }
-
-
     render() {
         const {classes} = this.props;
 

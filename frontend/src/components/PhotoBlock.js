@@ -30,7 +30,7 @@ class PhotoBlock extends Component {
         const {classes} = this.props;
         return (
             <div className={classes.root}>
-                <img className={classes.studentImg} src={userPhoto}/>
+                <img alt="profil" className={classes.studentImg} src={userPhoto}/>
             </div>
         );
     }
