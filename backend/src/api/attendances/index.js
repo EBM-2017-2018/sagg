@@ -19,10 +19,12 @@ const controller = require('./attendances.controller');
  * {
  * "id" : "5a9e7d53e1e17ba00442659d",
  * "ishere" : true
+ * "comments" : "Tout le tmeps en retard"
  * },
  * {
  * "id" : "5a9e7d53e1e17ba0044265ad",
- * "ishere" : false
+ * "ishere" : false,
+ * "comments": "il est relou"
  *}
  *]
  *}
@@ -55,7 +57,8 @@ router.post('/', controller.create);
  *          "attendees": [
  *                      {
  *                         "id" : "5a9e7d53e1e17ba00442659d",
- *                         "ishere" : true
+ *                         "ishere" : true,
+ *                         "comments" : "c'est le roi des boubous"
  *                      },
  *                      {
  *                         "id" : "5a9e7d53e1e17ba00442658q",
