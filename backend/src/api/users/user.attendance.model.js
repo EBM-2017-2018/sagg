@@ -10,6 +10,9 @@ const UserAttendance = new Schema({
     type: Boolean,
     defaut: false,
   },
+  comments: {
+    type: String,
+  },
 });
 
 module.exports = UserAttendance;
