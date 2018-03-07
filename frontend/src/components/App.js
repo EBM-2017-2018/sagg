@@ -7,6 +7,9 @@ import theme from '../theme';
 import GlobalAppBar from './GlobalAppBar';
 import TabBar from './TabBar'
 import Content from './Content';
+import StudentRow from "./StudentRow";
+import AttendanceSheet from "./AttendanceSheet";
+import Button from "material-ui/es/Button/Button";
 
 const styles = theme => ({
   root: {
@@ -36,11 +39,14 @@ class App extends Component {
       <div className={classes.root}>
         <MuiThemeProvider theme={theme}>
           <Reboot/>
-          <GlobalAppBar appTitle="SAGG" hasTabBarBelow/>
+          <GlobalAppBar appTitle="EBM Boilerplate" hasTabBarBelow/>
           <TabBar/>
           {/* You should work mainly in the Content component */}
           <Content className={classes.content}/>
+
+
         </MuiThemeProvider>
+
       </div>
     );
   }
