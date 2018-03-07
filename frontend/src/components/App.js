@@ -7,9 +7,6 @@ import theme from '../theme';
 import GlobalAppBar from './GlobalAppBar';
 import TabBar from './TabBar'
 import Content from './Content';
-import StudentRow from "./StudentRow";
-import AttendanceSheet from "./AttendanceSheet";
-import Button from "material-ui/es/Button/Button";
 
 const styles = theme => ({
   root: {

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import StudentInfosBlock from './StudentInfosBlock';
-import {Checkbox, Table, withStyles, TextField} from 'material-ui';
+import {withStyles} from 'material-ui';
 import PhotoBlock from "./PhotoBlock";
 import CommentaryBlock from "./CommentaryBlock";
 import IsAttendingBlock from "./IsAttendingBlock";

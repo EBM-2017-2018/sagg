@@ -1,8 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {MuiThemeProvider, Button} from 'material-ui';
+import {Button} from 'material-ui';
 import AttendanceSheet from "./AttendanceSheet";
-import theme from '../theme';
 
 class Content extends PureComponent {
 
