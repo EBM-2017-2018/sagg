@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {withStyles} from 'material-ui';
-import Button from "material-ui/es/Button/Button";
+import {withStyles, Button} from 'material-ui';
 
 
 
