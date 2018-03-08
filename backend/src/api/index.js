@@ -2,7 +2,6 @@ const { Router } = require('express');
 
 const router = new Router();
 
-router.use('/courses', require('./courses'));
-router.use('/attendances', require('./attendances'));
+router.use('/promos', require('./courses'));
 
 module.exports = router;
