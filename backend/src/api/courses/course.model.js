@@ -1,11 +1,15 @@
 const mongoose = require('mongoose');
 
-const Promo = require('../promo/promo.model');
+const UserCourses = require('../users/user.course.model');
 
 const CourseSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
-    promo: [Promo],
+    teacher: { type: String },
+    start_time: { type: Date, default: Date.now() },
+    end_time: { type: Date, default: Date.now() },
+    attendees: [UserCourses],
+    promoId: { type: String },
   },
   {
     timestamps: true,

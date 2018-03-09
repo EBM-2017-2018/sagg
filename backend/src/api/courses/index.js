@@ -42,12 +42,12 @@ const controller = require('./courses.controller');
  *
  * @apiError (500) Mongoose Error
  */
-router.get('/', controller.findAll);
+router.get('/:pid/courses', controller.findAll);
 
 /**
 * @apiVersion 1.0.0-SNAPSHOT
  * @api {post} /promos/:pid/courses postCourses
- * @apiDescription Crée un cours associé à une promo
+ * @apiDescription Crée un cours associé à une promo, date au format ISO8601
  * @apiName postCourses
  * @apiParam {String} pid Id de la promo
  * @apiGroup Cours
@@ -87,14 +87,13 @@ router.get('/', controller.findAll);
  * @apiError (500) Mongoose Error
  * @apiError (404) Missing Fields
  */
-router.post('/', controller.create);
+router.post('/:pid/courses', controller.create);
 
 /**
 * @apiVersion 1.0.0-SNAPSHOT
- * @api {put} /promos/:pid/courses/:cid putCourses
- * @apiDescription Modifier la présence des élèves à un cours
+ * @api {put} /promos/courses/:cid putCourses
+ * @apiDescription Modifier la présence des élèves à un cours, id promo non nécess
  * @apiName putCourses
- * @apiParam {String} pid Id de la promo
  * @apiParam {String} cid Id du cours
  * @apiGroup Cours
 
@@ -134,6 +133,6 @@ router.post('/', controller.create);
  * @apiError (404) Missing Fields
  */
 
-router.put('/', (req, res) => res.send('Hello'));
+router.put('/courses/:cid', controller.update);
 
 module.exports = router;
