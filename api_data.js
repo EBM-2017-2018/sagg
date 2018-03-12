@@ -4,7 +4,7 @@ define({ "api": [
     "type": "get",
     "url": "/promos/:pid/courses",
     "title": "getCourses",
-    "description": "<p>récupère la liste de tous les cours associés à une promo</p>",
+    "description": "<p>récupère la liste de tous les cours associés à une promo Attention le rôle du token doit être différent d'un étudiant pour y acceder</p>",
     "name": "getCourses",
     "parameter": {
       "fields": {
@@ -15,6 +15,19 @@ define({ "api": [
             "optional": false,
             "field": "pid",
             "description": "<p>Id de la promo</p>"
+          }
+        ]
+      }
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>JWT token</p>"
           }
         ]
       }
@@ -35,13 +48,21 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n [\n     {\n         \"promoId\" : \"5b9ea41a4e2d37b1400c7b7a\",\n         \"title\" : \"Cours 1\",\n         \"teacher\" : \"Thomas Bourdeau'huy\",\n         \"start_time\" : \"2017-05-05T11:30:00Z\",\n         \"end_time\" : \"2017-05-05T13:30:00Z\"\n         \"attendees\": [\n                  {\n                     \"id\" : \"5a9edz41a4e7d37b1400c7b7a\",\n                     \"ishere\" : \"true\",\n                     \"comments\" : \"TRop de retard, attention à lui\"\n                  },\n                  {\n                     \"id\" : \"5a9edz41a4e7d37b1400c7b7v\",\n                     \"ishere\" : \"false\",\n                     \"comments\" : \"\"\n                  }\n                 ],\n         \"_id\": \"5a9ea41a4e7d37b1400c7b7e\",\n     }\n ]\n}",
+          "content": "{\n courses: [\n     {\n         \"promoId\" : \"5b9ea41a4e2d37b1400c7b7a\",\n         \"title\" : \"Cours 1\",\n         \"teacher\" : \"Thomas Bourdeau'huy\",\n         \"start_time\" : \"2017-05-05T11:30:00Z\",\n         \"end_time\" : \"2017-05-05T13:30:00Z\"\n         \"attendees\": [\n                  {\n                     \"id\" : \"5a9edz41a4e7d37b1400c7b7a\",\n                     \"ishere\" : \"true\",\n                     \"comments\" : \"TRop de retard, attention à lui\"\n                  },\n                  {\n                     \"id\" : \"5a9edz41a4e7d37b1400c7b7v\",\n                     \"ishere\" : \"false\",\n                     \"comments\" : \"\"\n                  }\n                 ],\n         \"_id\": \"5a9ea41a4e7d37b1400c7b7e\",\n     }\n ],\n   \"new_access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6\nInJvb3QiLCJyb2xlIjoiZXR1ZGlhbnQiLCJub20iOiJyb290IiwicHJlbm9tIjoicm9vdCIsI\nmVtYWlsIjoicm9vdEBldHVkaWFudC5mciIsImlhdCI6MTUyMDg1MjkxN30.fbHx4vToa-K9pAiVGn1q-6n3N\n-vH7tk_DMQssqk-5w0\"\n}",
           "type": "json"
         }
       ]
     },
     "error": {
       "fields": {
+        "404": [
+          {
+            "group": "404",
+            "optional": false,
+            "field": "Missing/WrongToken",
+            "description": "<p>Fields</p>"
+          }
+        ],
         "500": [
           {
             "group": "500",
@@ -67,6 +88,19 @@ define({ "api": [
     "title": "postCourses",
     "description": "<p>Crée un cours associé à une promo, date au format ISO8601</p>",
     "name": "postCourses",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>JWT token</p>"
+          }
+        ]
+      }
+    },
     "parameter": {
       "fields": {
         "Parameter": [
@@ -103,7 +137,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n success : true\n}",
+          "content": "{\nsuccess : true\nnew_access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJ\nvb3QiLCJyb2xlIjoiZXR1ZGlhbnQiLCJub20iOiJyb290IiwicHJlbm9tIjoicm9vdCIsImVtYWlsIjo\nicm9vdEBldHVkaWFudC5mciIsImlhdCI6MTUyMDg1MjkxN30.fbHx4vToa-K9pAiVGn1q-6n3N-vH7tk_DMQssqk-5w0\n}",
           "type": "json"
         }
       ]
@@ -114,7 +148,7 @@ define({ "api": [
           {
             "group": "404",
             "optional": false,
-            "field": "Missing",
+            "field": "Missing/WrongToken",
             "description": "<p>Fields</p>"
           }
         ],
@@ -143,6 +177,19 @@ define({ "api": [
     "title": "putCourses",
     "description": "<p>Modifier la présence des élèves à un cours, id promo non nécess</p>",
     "name": "putCourses",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>JWT token</p>"
+          }
+        ]
+      }
+    },
     "parameter": {
       "fields": {
         "Parameter": [
@@ -179,7 +226,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n success : true\n}",
+          "content": "{\n success : true\nnew_access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJ\nvb3QiLCJyb2xlIjoiZXR1ZGlhbnQiLCJub20iOiJyb290IiwicHJlbm9tIjoicm9vdCIsImVtYWlsIjo\nicm9vdEBldHVkaWFudC5mciIsImlhdCI6MTUyMDg1MjkxN30.fbHx4vToa-K9pAiVGn1q-6n3N-vH7tk_DMQssqk-5w0\n}",
           "type": "json"
         }
       ]
@@ -190,7 +237,7 @@ define({ "api": [
           {
             "group": "404",
             "optional": false,
-            "field": "Missing",
+            "field": "Missing/WrongToken",
             "description": "<p>Fields</p>"
           }
         ],
