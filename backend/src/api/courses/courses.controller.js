@@ -1,5 +1,5 @@
 const Course = require('./course.model');
-// const { checkTokenAndRenewIt } = require('../auth/jwt');
+const { checkTokenAndRenewIt } = require('../auth/jwt');
 
 module.exports = {};
 
@@ -18,23 +18,25 @@ module.exports.create = (req, res) => {
       message: 'La promo n\'est pas défini',
     });
   }
-  // checkTokenAndRenewIt(req.token, (error, validation) => {
-  //   if (error || !validation) {
-  //     res.status(403).json({
-  //       code: 'UNAUTHORIZED',
-  //       message: 'Le token est manquant, est invalide ou bien cet utilisation n\'a pas le droit',
-  //     });
-  //   }
-  const course = new Course(Object.assign({}, req.body, { promoId: req.params.pid }));
-  course.save((err) => {
-    if (err) {
-      return res.status(500).json(err);
+  checkTokenAndRenewIt(req.token, (error, rep) => {
+    if (error || (rep.validation && !rep.validation)) {
+      return res.status(403).json({
+        code: 'UNAUTHORIZED',
+        message: 'Le token est manquant, est invalide ou bien cet utilisateur n\'est pas un professeur/intervant.',
+      });
     }
-    return res.status(201).json({
-      success: true,
+    const course = new Course(Object.assign({}, req.body, { promoId: req.params.pid }));
+    course.save((err) => {
+      if (err) {
+        return res.status(500).json(err);
+      }
+      return res.status(201).json({
+        success: true,
+        new_access_token: `JWT ${rep.newToken}`,
+      });
     });
+    return null;
   });
-  // });
 };
 
 module.exports.findAll = (req, res) => {
@@ -45,15 +47,27 @@ module.exports.findAll = (req, res) => {
       message: 'La promo n\'est pas défini',
     });
   }
-  Course.find(
-    { promoId: req.params.pid },
-    (err, courses) => {
-      if (err) {
-        return res.status(500).json(err);
-      }
-      return res.status(200).json(courses);
-    },
-  );
+  checkTokenAndRenewIt(req.token, (error, rep) => {
+    if (error || (rep.validation && !rep.validation)) {
+      return res.status(403).json({
+        code: 'UNAUTHORIZED',
+        message: 'Le token est manquant, est invalide ou bien cet utilisateur n\'est pas un professeur/intervant.',
+      });
+    }
+    Course.find(
+      { promoId: req.params.pid },
+      (err, courses) => {
+        if (err) {
+          return res.status(500).json(err);
+        }
+        return res.status(200).json({
+          courses,
+          new_access_token: rep.newToken,
+        });
+      },
+    );
+    return null;
+  });
 };
 
 module.exports.update = (req, res) => {
@@ -71,19 +85,29 @@ module.exports.update = (req, res) => {
       message: 'La promo ou le cours n\'est pas défini',
     });
   }
-  Course.update(
-    { _id: req.params.cid },
-    {
-      $set: req.body,
-    },
-    (err) => {
-      if (err) {
-        return res.status(500).json(err);
-      }
-      return res.status(200).json({
-        success: true,
-        message: 'Le cours a correctement été modifié',
+  checkTokenAndRenewIt(req.token, (error, rep) => {
+    if (error || (rep.validation && !rep.validation)) {
+      return res.status(403).json({
+        code: 'UNAUTHORIZED',
+        message: 'Le token est manquant, est invalide ou bien cet utilisateur n\'est pas un professeur/intervant.',
       });
-    },
-  );
+    }
+    Course.update(
+      { _id: req.params.cid },
+      {
+        $set: req.body,
+      },
+      (err) => {
+        if (err) {
+          return res.status(500).json(err);
+        }
+        return res.status(200).json({
+          success: true,
+          message: 'Le cours a correctement été modifié.',
+          new_access_token: rep.newToken,
+        });
+      },
+    );
+    return null;
+  });
 };

@@ -17,10 +17,16 @@ function checkTokenAndRenewIt(token, callback) {
       .set('accept', 'json')
       .set('Authorization', `JWT ${token}`)
       .end((error, response) => {
-        if (error || response.status !== 200) {
-          callback(error, null);
+        if (response.body && response.body.newToken) {
+          callback(
+            null,
+            {
+              validation: decodeToGetTheRoleFromToken(response.body.newToken) !== 'etudiant',
+              newToken: response.body.newToken,
+            },
+          );
         } else {
-          callback(null, decodeToGetTheRoleFromToken(response.body.newToken) !== 'etudiant');
+          callback(new Error('Unauthorized'), null);
         }
       });
   } else {
