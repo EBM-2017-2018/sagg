@@ -18,25 +18,25 @@ module.exports.create = (req, res) => {
       message: 'La promo n\'est pas défini',
     });
   }
-  checkTokenAndRenewIt(req.token, (error, rep) => {
-    if (error || (rep.validation && !rep.validation)) {
-      return res.status(403).json({
-        code: 'UNAUTHORIZED',
-        message: 'Le token est manquant, est invalide ou bien cet utilisateur n\'est pas un professeur/intervant.',
-      });
+  // checkTokenAndRenewIt(req.token, (error, rep) => {
+  //   if (error || (rep.validation && !rep.validation)) {
+  //     return res.status(403).json({
+  //       code: 'UNAUTHORIZED',
+  //       message: 'Le token est manquant, est invalide.',
+  //     });
+  //   }
+  const course = new Course(Object.assign({}, req.body, { promoId: req.params.pid }));
+  course.save((err) => {
+    if (err) {
+      return res.status(500).json(err);
     }
-    const course = new Course(Object.assign({}, req.body, { promoId: req.params.pid }));
-    course.save((err) => {
-      if (err) {
-        return res.status(500).json(err);
-      }
-      return res.status(201).json({
-        success: true,
-        new_access_token: `JWT ${rep.newToken}`,
-      });
+    return res.status(201).json({
+      success: true,
+      // new_access_token: `JWT ${rep.newToken}`,
     });
-    return null;
   });
+  //   return null;
+  // });
 };
 
 module.exports.findAll = (req, res) => {
