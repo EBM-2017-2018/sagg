@@ -47,27 +47,27 @@ module.exports.findAll = (req, res) => {
       message: 'La promo n\'est pas défini',
     });
   }
-  checkTokenAndRenewIt(req.token, (error, rep) => {
-    if (error || (rep.validation && !rep.validation)) {
-      return res.status(403).json({
-        code: 'UNAUTHORIZED',
-        message: 'Le token est manquant, est invalide ou bien cet utilisateur n\'est pas un professeur/intervant.',
+  // checkTokenAndRenewIt(req.token, (error, rep) => {
+  //   if (error || (rep.validation && !rep.validation)) {
+  //     return res.status(403).json({
+  //       code: 'UNAUTHORIZED',
+  //       message: 'Le token est manquant, est invalide.',
+  //     });
+  //   }
+  Course.find(
+    { promoId: req.params.pid },
+    (err, courses) => {
+      if (err) {
+        return res.status(500).json(err);
+      }
+      return res.status(200).json({
+        courses,
+        // new_access_token: rep.newToken,
       });
-    }
-    Course.find(
-      { promoId: req.params.pid },
-      (err, courses) => {
-        if (err) {
-          return res.status(500).json(err);
-        }
-        return res.status(200).json({
-          courses,
-          new_access_token: rep.newToken,
-        });
-      },
-    );
-    return null;
-  });
+    },
+  );
+  //   return null;
+  // });
 };
 
 module.exports.update = (req, res) => {
