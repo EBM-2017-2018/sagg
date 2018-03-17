@@ -11,8 +11,13 @@ const server = require('http').Server(app);
 require('./config/mongoose');
 require('./config/express')(app);
 
+app.use(require('ebm-auth/express').initialize({
+  provider: 'https://linkapp.ebm.nymous.io/',
+}));
 
-app.use('/api', require('./api'));
+app.use('/api', require('ebm-auth/express').requireAuth({
+  provider: 'https://linkapp.ebm.nymous.io/',
+}), require('./api'));
 
 app.use(serveStatic('./public'));
 

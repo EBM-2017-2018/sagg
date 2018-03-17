@@ -1,9 +1,17 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+
 import {Button} from 'material-ui';
 import CreateCourseModal from "./CreateCourseModal";
 import DateFnsUtils from "material-ui-pickers/utils/date-fns-utils";
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider'
+
+import {MuiThemeProvider, Button} from 'material-ui';
+import AttendanceSheet from "./AttendanceSheet";
+import theme from '../theme';
+
+
+
 
 class Content extends PureComponent {
 

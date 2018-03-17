@@ -1,7 +1,17 @@
 import React, {Component} from 'react';
 
-import {withStyles} from 'material-ui';
+import StudentInfosBlock from './StudentInfosBlock';
+import {Checkbox, Table, withStyles, TextField} from 'material-ui';
+import PhotoBlock from "./PhotoBlock";
+import CommentaryBlock from "./CommentaryBlock";
+import IsAttendingBlock from "./IsAttendingBlock";
 import Button from "material-ui/es/Button/Button";
+
+import {withStyles, Button} from 'material-ui';
+
+
+
+
 
 
 const styles = theme => ({

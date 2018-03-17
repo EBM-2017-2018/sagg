@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const UserAttendance = new Schema({
+const UserCourses = new Schema({
   id: {
     type: String,
   },
@@ -15,4 +15,4 @@ const UserAttendance = new Schema({
   },
 });
 
-module.exports = UserAttendance;
+module.exports = UserCourses;
