@@ -3,7 +3,6 @@ import userPhoto from "./../avatar.png"
 import {withStyles} from "material-ui";
 
 
-
 const styles = theme => ({
     root: {
         display: "flex",
@@ -15,10 +14,9 @@ const styles = theme => ({
 
 
     },
-    studentImg:{
-        width:"100%"
+    studentImg: {
+        width: "100%"
     },
-
 
 
 });

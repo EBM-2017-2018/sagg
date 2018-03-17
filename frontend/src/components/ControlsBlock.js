@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
-import StudentInfosBlock from './StudentInfosBlock';
-import {Checkbox, Table, withStyles, TextField} from 'material-ui';
-import PhotoBlock from "./PhotoBlock";
-import CommentaryBlock from "./CommentaryBlock";
-import IsAttendingBlock from "./IsAttendingBlock";
-import Button from "material-ui/es/Button/Button";
 
+import {withStyles} from 'material-ui';
+import Button from "material-ui/es/Button/Button";
 
 
 const styles = theme => ({
@@ -13,30 +9,25 @@ const styles = theme => ({
 
         display: "flex",
         flexDirection: "row",
-        flexAlign : "right",
+        flexAlign: "right",
         justifyContent: "flex-end",
         width: "100%",
-        paddingRight : "20px"
+        paddingRight: "20px"
 
     },
 
-    button:{
-       margin: "5px 5px",
+    button: {
+        margin: "5px 5px",
     }
-
-
-
-
-
-
 
 
 });
 
 class ControlsBlock extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.discard = this.discard.bind(this);
+        this.save = this.save.bind(this);
 
     }
 
@@ -44,17 +35,19 @@ class ControlsBlock extends Component {
         const {classes} = this.props;
         return (
             <div className={classes.root}>
-                <Button className={classes.button} variant="raised"  color="secondary" onClick={this.save}>Sauvegarder</Button>
-                <Button className={classes.button} variant="raised" color="secondary" onClick={this.discard}>Annuler</Button>
+                <Button className={classes.button} variant="raised" color="secondary"
+                        onClick={this.discard}>Annuler</Button>
+                <Button className={classes.button} variant="raised" color="secondary"
+                        onClick={this.save}>Sauvegarder</Button>
             </div>
         );
     }
 
-    save(){
-       // fetch()
+    save() {
+        this.props.onSave();
     }
 
-    discard(){
+    discard() {
         this.props.discard();
     }
 

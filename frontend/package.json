@@ -4,13 +4,13 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.5",
-    "material-ui": "^1.0.0-beta.36",
-    "material-ui-icons": "^1.0.0-beta.36",
+    "material-ui": "^1.0.0-beta.35",
+    "material-ui-icons": "^1.0.0-beta.17",
+    "material-ui-pickers": "^1.0.0-rc.2",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.1",
-    "superagent": "^3.8.2",
     "typeface-roboto": "0.0.54"
   },
   "jest": {

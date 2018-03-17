@@ -7,7 +7,12 @@ class StudentInfosBlock extends Component {
 
 
         return (
-            <div style={{borderRight: "1px solid black", borderLeft: "1px solid black", minWidth: "300px", boxSizing: "border-box"}}>
+            <div style={{
+                borderRight: "1px solid black",
+                borderLeft: "1px solid black",
+                minWidth: "300px",
+                boxSizing: "border-box"
+            }}>
                 <p>Dejean</p>
                 <p>Paul</p>
                 <p>G1</p>
