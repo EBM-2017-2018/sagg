@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Button, TextField, withStyles} from "material-ui";
-import {DatePicker, TimePicker} from 'material-ui-pickers'
+import {DatePicker, TimePicker} from 'material-ui-pickers';
+
 
 
 const styles = theme => ({

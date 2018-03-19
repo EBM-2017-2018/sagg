@@ -4,10 +4,10 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.5",
-    "date-fns": "^1.29.0",
+    "date-fns": "^2.0.0-alpha.7",
     "material-ui": "^1.0.0-beta.35",
     "material-ui-icons": "^1.0.0-beta.17",
-    "material-ui-pickers": "^1.0.0-rc.2",
+    "material-ui-pickers": "^1.0.0-rc.3",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
