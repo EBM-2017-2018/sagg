@@ -19,9 +19,6 @@ const styles = theme => ({
 
 });
 
-const options = [
-    'one', 'two', 'three'
-]
 
 class CreateCourseModal extends Component {
 
