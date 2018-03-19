@@ -3,13 +3,13 @@ import {Checkbox, withStyles} from 'material-ui';
 
 
 const styles = theme => ({
-    attendanceBlock:{
+    attendanceBlock: {
         width: "20%",
         height: "100%",
         borderRight: "1px solid black",
         display: "flex",
-        flexDirection :"vertical",
-        justifyContent : "center",
+        flexDirection: "vertical",
+        justifyContent: "center",
         alignItems: "center"
     }
 
@@ -23,23 +23,11 @@ class IsAttendingBlock extends Component {
         return (
             <div className={classes.attendanceBlock}>
                 <label>Est présent</label>
-                <Checkbox onClick={this.handleClick}/>
+                <Checkbox onClick={this.props.onCheckboxClick} checked={this.props.checkboxValue}/>
             </div>
         );
     }
 
-    handleClick(){
-        console.log("click");
-
-
-
-        const url = 'https://sagg.ebm.nymous.io/api/courses'
-        fetch(url, { mode: 'cors'})
-            .then(function(response){return response.json()})
-            .then(function(blob){
-                console.log(blob);
-            });// Transform the data into json
-    }
 }
 
 export default withStyles(styles)(IsAttendingBlock);

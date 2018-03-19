@@ -9,24 +9,16 @@ class TabBar extends PureComponent {
         classes: PropTypes.object.isRequired
     };
 
-    state = {
-        selectedTab: 0
-    };
-
-    handleChange = (event, value) => {
-        this.setState({selectedTab: value});
-    };
 
     render() {
         return (
             <AppBar position="static">
                 <Tabs
-                    value={this.state.selectedTab}
-                    onChange={this.handleChange}
+                    value={this.props.tabValue}
+                    onChange={this.props.onTabChange}
                     fullWidth>
-                    <Tab label="Onglet 1"/>
-                    <Tab label="Onglet 2"/>
-                    <Tab label="Onglet 3"/>
+                    <Tab label="Feuille d'appel"/>
+                    <Tab label="Groupes"/>
                 </Tabs>
             </AppBar>
         );

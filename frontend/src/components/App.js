@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import {MuiThemeProvider, Reboot, withStyles} from 'material-ui';
 import PropTypes from 'prop-types';
-import DateFnsUtils from 'material-ui-pickers/utils/date-fns-utils'
-import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider'
 
 import './App.css';
 import theme from '../theme';
 import GlobalAppBar from './GlobalAppBar';
 import TabBar from './TabBar'
-import Content from './Content';
+import AttendanceSheetContent from './AttendanceSheetContent';
+import GroupsContent from "./GroupsContent";
 
 const styles = theme => ({
     root: {
@@ -31,6 +30,14 @@ class App extends Component {
         classes: PropTypes.object.isRequired
     };
 
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            tabSelected: 0
+        };
+    }
+
     render() {
         const {classes} = this.props;
 
@@ -41,9 +48,10 @@ class App extends Component {
 
                     <Reboot/>
                     <GlobalAppBar appTitle="EBM Boilerplate" hasTabBarBelow/>
-                    <TabBar/>
+                    <TabBar onTabChange={this.handleTabChange} tabValue={this.state.tabSelected}/>
                     {/* You should work mainly in the Content component */}
-                    <Content className={classes.content}/>
+                    {this.state.tabSelected === 0 ? <AttendanceSheetContent className={classes.content}/> : null}
+                    {this.state.tabSelected === 1 ? <GroupsContent className={classes.content}/> : null}
 
 
                 </MuiThemeProvider>
@@ -52,6 +60,13 @@ class App extends Component {
             </div>
         );
     }
+
+    handleTabChange = (event, value) => {
+        console.log(event);
+        console.log(value);
+        this.setState({tabSelected: value});
+        console.log(this.state);
+    };
 }
 
 export default withStyles(styles)(App);
