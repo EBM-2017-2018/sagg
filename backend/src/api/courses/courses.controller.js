@@ -58,6 +58,26 @@ module.exports.findAll = (req, res) => {
   return null;
 };
 
+module.exports.findAllCourses = (req, res) => {
+  if (req.user && req.user.role === 'etudiant') {
+    return res.status(403).json({
+      code: 'UNAUTHORIZED',
+      success: false,
+      message: 'Cet action est uniquement réservée à un professeur/intervant.',
+    });
+  }
+  Course.find((err, courses) => {
+    if (err) {
+      return res.status(500).json(err);
+    }
+    return res.status(200).json({
+      courses,
+    });
+  });
+  return null;
+};
+
+
 module.exports.update = (req, res) => {
   if (!req.body) {
     return res.status(404).json({
