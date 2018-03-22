@@ -1,4 +1,5 @@
 const Course = require('./course.model');
+const { replaceAllUserByAttribute } = require('../users/users.controller');
 
 module.exports = {};
 
@@ -50,9 +51,17 @@ module.exports.findAll = (req, res) => {
       if (err) {
         return res.status(500).json(err);
       }
-      return res.status(200).json({
-        courses,
-      });
+      const promises = courses.map(element =>
+        replaceAllUserByAttribute(element.attendees, req.headers.authorization)
+          .then((rep) => {
+            Object.assign(element.attendees, rep);
+            return element;
+          }));
+      Promise.all(promises)
+        .then(results => res.status(200).json({
+          courses: results,
+        }));
+      return courses || null;
     },
   );
   return null;
@@ -70,9 +79,17 @@ module.exports.findAllCourses = (req, res) => {
     if (err) {
       return res.status(500).json(err);
     }
-    return res.status(200).json({
-      courses,
-    });
+    const promises = courses.map(element =>
+      replaceAllUserByAttribute(element.attendees, req.headers.authorization)
+        .then((rep) => {
+          Object.assign(element.attendees, rep);
+          return element;
+        }));
+    Promise.all(promises)
+      .then(results => res.status(200).json({
+        courses: results,
+      }));
+    return courses || null;
   });
   return null;
 };
