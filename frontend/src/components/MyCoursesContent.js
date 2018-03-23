@@ -29,7 +29,8 @@ class promotionsContent extends PureComponent {
           .then(data => {
             this.setState({ selectedCourse: data.courses,
                             selectedPromo: this.state.promotions.find(e => e._id === event.target.value) })
-          }) 
+          })
+            .catch(err => console.log(err))
     };
 
     componentDidMount() {
@@ -42,7 +43,8 @@ class promotionsContent extends PureComponent {
           .then((response) => console.log(response) || response.json() )
           .then(data => {
             this.setState({ promotions: data.promotions })
-          }) 
+          })
+            .catch(err => console.log(err))
     }
     constructor(props) {
         super(props);
