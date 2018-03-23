@@ -1,5 +1,4 @@
 const Course = require('./course.model');
-const { replaceAllUserByAttribute } = require('../users/users.controller');
 
 module.exports = {};
 
@@ -51,49 +50,13 @@ module.exports.findAll = (req, res) => {
       if (err) {
         return res.status(500).json(err);
       }
-      const promises = courses.map(element =>
-        replaceAllUserByAttribute(element.attendees, req.headers.authorization)
-          .then((rep) => {
-            Object.assign(element.attendees, rep);
-            return element;
-          }));
-      Promise.all(promises)
-        .then(results => res.status(200).json({
-          courses: results,
-        }));
-      return courses || null;
+      return res.status(200).json({
+        courses,
+      });
     },
   );
   return null;
 };
-
-module.exports.findAllCourses = (req, res) => {
-  if (req.user && req.user.role === 'etudiant') {
-    return res.status(403).json({
-      code: 'UNAUTHORIZED',
-      success: false,
-      message: 'Cet action est uniquement réservée à un professeur/intervant.',
-    });
-  }
-  Course.find((err, courses) => {
-    if (err) {
-      return res.status(500).json(err);
-    }
-    const promises = courses.map(element =>
-      replaceAllUserByAttribute(element.attendees, req.headers.authorization)
-        .then((rep) => {
-          Object.assign(element.attendees, rep);
-          return element;
-        }));
-    Promise.all(promises)
-      .then(results => res.status(200).json({
-        courses: results,
-      }));
-    return courses || null;
-  });
-  return null;
-};
-
 
 module.exports.update = (req, res) => {
   if (!req.body) {

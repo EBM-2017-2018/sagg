@@ -1,8 +1,14 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {AppBar, Tab, Tabs, withStyles} from 'material-ui';
+import {AppBar, Tab, Tabs, withStyles, Badge} from 'material-ui';
+import { apiRoute, testTokenProf } from '../config/routes';
 
-const styles = {};
+const styles = theme => ({
+    padding: {
+      marginLeft: '10px'
+    },
+  });
+  
 
 class TabBar extends PureComponent {
     static propTypes = {
@@ -10,7 +16,29 @@ class TabBar extends PureComponent {
     };
 
 
+    componentDidMount() {
+        fetch(`${apiRoute.sagg}/promos/courses`, {
+            method: 'GET',
+            headers : { 
+              'Authorization': testTokenProf.access_token
+             }
+      
+          })
+          .then((response) => console.log(response) || response.json() )
+          .then(data => {
+            this.setState({ nbCourse: data.courses ? data.courses.length : '' })
+          }) 
+    }
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            nbCourse : ''
+        }
+    }
+
     render() {
+        const { classes } = this.props;
         return (
             <AppBar position="static">
                 <Tabs
@@ -19,6 +47,13 @@ class TabBar extends PureComponent {
                     fullWidth>
                     <Tab label="Feuille d'appel"/>
                     <Tab label="Groupes"/>
+                    <Tab
+            label={
+              <Badge color="secondary" className={classes.padding} badgeContent={this.state.nbCourse}>
+                Mes cours
+              </Badge>
+            }
+          />
                 </Tabs>
             </AppBar>
         );

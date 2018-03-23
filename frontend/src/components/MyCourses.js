@@ -13,7 +13,7 @@ const styles = theme => ({
 
 });
 
-class Group extends Component {
+class Course extends Component {
 
 
     render() {
@@ -28,4 +28,4 @@ class Group extends Component {
 
 }
 
-export default withStyles(styles)(Group);
+export default withStyles(styles)(Course);
