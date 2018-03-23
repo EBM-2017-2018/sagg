@@ -19,7 +19,7 @@ class promotionsContent extends PureComponent {
 
     handlepromotionselect = event => {
         console.log(event.target.value);
-        fetch(`${apiRoute.sagg_local}/promos/${event.target.value}/courses`, {
+        fetch(`${apiRoute.sagg}/promos/${event.target.value}/courses`, {
             method: 'GET',
             headers : { 
               'Authorization': testTokenProf.access_token

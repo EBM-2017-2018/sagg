@@ -17,7 +17,7 @@ class TabBar extends PureComponent {
 
 
     componentDidMount() {
-        fetch(`${apiRoute.sagg_local}/promos/courses`, {
+        fetch(`${apiRoute.sagg}/promos/courses`, {
             method: 'GET',
             headers : { 
               'Authorization': testTokenProf.access_token
