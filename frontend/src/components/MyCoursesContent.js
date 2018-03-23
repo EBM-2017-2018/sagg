@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import Select from 'material-ui/Select'
 import { MenuItem } from 'material-ui/Menu';
-import { InputLabel } from 'material-ui';
+import { InputLabel, Typography } from 'material-ui';
 import DetailCourse from './DetailCourse';
 import { apiRoute, testTokenProf } from '../config/routes';
 
@@ -27,7 +27,8 @@ class promotionsContent extends PureComponent {
           })
           .then((response) => console.log(response) || response.json() )
           .then(data => {
-            this.setState({ selectedCourse: data.courses })
+            this.setState({ selectedCourse: data.courses,
+                            selectedPromo: this.state.promotions.find(e => e._id === event.target.value) })
           }) 
     };
 
@@ -60,7 +61,8 @@ class promotionsContent extends PureComponent {
         return (
             <div align="center">
         <InputLabel htmlFor="promotions-simple">
-        <h3>Veuillez sélectionner une promo
+        <h3>{this.state.selectedPromo ? this.state.selectedPromo.nomPromo 
+            : 'Veuillez sélectionner une promo'}
         </h3>
         </InputLabel>
           <Select
@@ -75,7 +77,8 @@ class promotionsContent extends PureComponent {
                 textAlign: 'center'
               }}  
           >
-            {  this.state.promotions ? this.state.promotions.map(option => 
+            {  this.state.promotions ?
+            this.state.promotions.map(option => 
             <MenuItem key={option._id}
             value={option._id}>
             {option.nomPromo}
