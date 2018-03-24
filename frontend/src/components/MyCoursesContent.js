@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import Select from 'material-ui/Select'
 import { MenuItem } from 'material-ui/Menu';
-import { InputLabel, Typography } from 'material-ui';
+import { InputLabel } from 'material-ui';
 import DetailCourse from './DetailCourse';
 import { apiRoute, testTokenProf } from '../config/routes';
 
