@@ -3,7 +3,16 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const UserCourses = new Schema({
-  id: {
+  username: {
+    type: String,
+  },
+  firstname: {
+    type: String,
+  },
+  lastname: {
+    type: String,
+  },
+  img: {
     type: String,
   },
   ishere: {
