@@ -7,6 +7,55 @@ const controller = require('./courses.controller');
 
 /**
 * @apiVersion 1.0.0-SNAPSHOT
+ * @api {get} /promos/courses getAllCourses
+ * @apiDescription récupère la liste de tous les cours
+ * Attention le rôle du token doit être différent d'un étudiant pour y acceder
+ * @apiName getAllCourses
+ * @apiHeader {String} Authorization JWT token
+ * @apiGroup Cours
+ * @apiSuccess {courses[]} courses liste des cours
+ * @apiSuccessExample {json} Success-Response:
+ *{
+ *  courses: [
+ *      {
+ *          "promoId" : "5b9ea41a4e2d37b1400c7b7a",
+ *          "title" : "Cours 1",
+ *          "teacher" : "Thomas Bourdeau'huy",
+ *          "start_time" : "2017-05-05T11:30:00Z",
+ *          "end_time" : "2017-05-05T13:30:00Z"
+ *          "attendees": [
+ *                   {
+ *                      "id" : "5a9edz41a4e7d37b1400c7b7a",
+ *                      "username" : "davzer",
+ *                      "firstname": "Paul",
+ *                      "lastname": "Jacques"
+ *                      "img": "image"
+ *                      "ishere" : "true",
+ *                      "comments" : "TRop de retard, attention à lui"
+ *                   },
+ *                   {
+ *                      "id" : "5a9edz41a4e7d37b1400c7b7v",
+ *                      "username" : "davzer",
+ *                      "firstname": "Paul",
+ *                      "lastname": "Jacques"
+ *                      "img": "image"
+ *                      "ishere" : "true",
+ *                      "comments" : "TRop de retard, attention à lui"
+ *                   }
+ *                  ],
+ *          "_id": "5a9ea41a4e7d37b1400c7b7e",
+ *      }
+ *  ],
+ *}
+
+ *
+ * @apiError (500) Mongoose Error
+ * @apiError (404) Missing/WrongToken Fields
+ */
+router.get('/courses', controller.findAllCourses);
+
+/**
+* @apiVersion 1.0.0-SNAPSHOT
  * @api {get} /promos/:pid/courses getCourses
  * @apiDescription récupère la liste de tous les cours associés à une promo
  * Attention le rôle du token doit être différent d'un étudiant pour y acceder
@@ -26,23 +75,25 @@ const controller = require('./courses.controller');
  *          "end_time" : "2017-05-05T13:30:00Z"
  *          "attendees": [
  *                   {
- *                      "id" : "5a9edz41a4e7d37b1400c7b7a",
+ *                      "username" : "davzer",
+ *                      "firstname": "Paul",
+ *                      "lastname": "Jacques"
+ *                      "img": "image"
  *                      "ishere" : "true",
  *                      "comments" : "TRop de retard, attention à lui"
  *                   },
  *                   {
- *                      "id" : "5a9edz41a4e7d37b1400c7b7v",
- *                      "ishere" : "false",
- *                      "comments" : ""
+ *                      "username" : "davzer",
+ *                      "firstname": "Paul",
+ *                      "lastname": "Jacques"
+ *                      "img": "image"
+ *                      "ishere" : "true",
+ *                      "comments" : "TRop de retard, attention à lui"
  *                   }
  *                  ],
  *          "_id": "5a9ea41a4e7d37b1400c7b7e",
  *      }
  *  ],
- *    "new_access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6
- * InJvb3QiLCJyb2xlIjoiZXR1ZGlhbnQiLCJub20iOiJyb290IiwicHJlbm9tIjoicm9vdCIsI
- * mVtYWlsIjoicm9vdEBldHVkaWFudC5mciIsImlhdCI6MTUyMDg1MjkxN30.fbHx4vToa-K9pAiVGn1q-6n3N
- * -vH7tk_DMQssqk-5w0"
  *}
 
  *
@@ -71,14 +122,14 @@ router.get('/:pid/courses', controller.findAll);
  *          "end_time" : "2017-05-05T13:30:00Z"
  *          "attendees": [
  *                   {
- *                      "id" : "5a9edz41a4e7d37b1400c7b7a",
+ *                      "username" : "davzer",
  *                      "ishere" : "true",
  *                      "comments" : "TRop de retard, attention à lui"
  *                   },
  *                   {
- *                      "id" : "5a9edz41a4e7d37b1400c7b7v",
- *                      "ishere" : "false",
- *                      "comments" : ""
+ *                      "username" : "davzer",
+ *                      "ishere" : "true",
+ *                      "comments" : "TRop de retard, attention à lui"
  *                   }
  *                  ]
  *      }
@@ -89,10 +140,7 @@ router.get('/:pid/courses', controller.findAll);
  * @apiSuccessExample {json} Success-Response:
  *{
  * success : true
- * new_access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJ
- * vb3QiLCJyb2xlIjoiZXR1ZGlhbnQiLCJub20iOiJyb290IiwicHJlbm9tIjoicm9vdCIsImVtYWlsIjo
- * icm9vdEBldHVkaWFudC5mciIsImlhdCI6MTUyMDg1MjkxN30.fbHx4vToa-K9pAiVGn1q-6n3N-vH7tk_DMQssqk-5w0
- *}
+ * }
 
  *
  * @apiError (500) Mongoose Error
@@ -120,14 +168,14 @@ router.post('/:pid/courses', controller.create);
  *          "end_time" : "2017-05-05T13:30:00Z"
  *          "attendees": [
  *                   {
- *                      "id" : "5a9edz41a4e7d37b1400c7b7a",
+ *                      "username" : "davzer",
  *                      "ishere" : "true",
  *                      "comments" : "TRop de retard, attention à lui"
  *                   },
  *                   {
- *                      "id" : "5a9edz41a4e7d37b1400c7b7v",
+ *                      "username" : "davzer",
  *                      "ishere" : "true",
- *                      "comments" : "Ce crétin s'est présenté en retard"
+ *                      "comments" : "TRop de retard, attention à lui"
  *                   }
  *                  ]
  *      }
@@ -138,10 +186,7 @@ router.post('/:pid/courses', controller.create);
  * @apiSuccessExample {json} Success-Response:
  *{
  *  success : true
- * new_access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJ
- * vb3QiLCJyb2xlIjoiZXR1ZGlhbnQiLCJub20iOiJyb290IiwicHJlbm9tIjoicm9vdCIsImVtYWlsIjo
- * icm9vdEBldHVkaWFudC5mciIsImlhdCI6MTUyMDg1MjkxN30.fbHx4vToa-K9pAiVGn1q-6n3N-vH7tk_DMQssqk-5w0
- *}
+ * }
 
  *
  * @apiError (500) Mongoose Error
