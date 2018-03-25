@@ -4,7 +4,7 @@ const defaultState = {
 }
 
 
-export default function reducer(state=defaultState, action) {
+export default function reducer(state = defaultState, action) {
 
     switch (action.type) {
 
@@ -20,8 +20,9 @@ export default function reducer(state=defaultState, action) {
         case "GET_PROMOS_REJECTED": {
             return {...state, fetching: false, error: action.payload}
         }
+        default :
+            return state;
     }
-
-    return state
+    
 }
 

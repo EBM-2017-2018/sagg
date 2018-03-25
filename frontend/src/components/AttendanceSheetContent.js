@@ -11,7 +11,7 @@ import AttendanceSheet from "./AttendanceSheet";
 import {connect} from "react-redux"
 import {getPromos} from "../actions/promoActions";
 import {refreshToken} from "../actions/loginActions"
-import {toggleButton, toggleAttendanceSheet, toggleCourseForm, saveAttendanceSheet} from "../actions/attendanceActions"
+import {saveAttendanceSheet, toggleAttendanceSheet, toggleButton, toggleCourseForm} from "../actions/attendanceActions"
 
 
 class AttendanceSheetContent extends PureComponent {
@@ -92,7 +92,7 @@ const mapDispatchToProps = dispatch => ({
     getToken: ()=> dispatch(refreshToken()),
     toggleButton: (isVisible) => dispatch(toggleButton(isVisible)),
     toggleAttendanceSheet: (isVisible) => dispatch(toggleAttendanceSheet(isVisible)),
-    toggleCourseForm : (isVisible) => dispatch(toggleCourseForm(isVisible)),
+    toggleCourseForm: (isVisible) => dispatch(toggleCourseForm(isVisible)),
     saveAttendanceSheet : (attendanceSheet) => dispatch(saveAttendanceSheet(attendanceSheet))
 })
 

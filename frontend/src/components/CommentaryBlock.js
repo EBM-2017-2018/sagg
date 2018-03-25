@@ -19,7 +19,7 @@ const styles = theme => ({
         height: "100%"
     },
 
-    title:{
+    title: {
         textAlign: "center",
         fontSize: "14px",
     }

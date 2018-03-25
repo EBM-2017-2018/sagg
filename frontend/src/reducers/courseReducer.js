@@ -32,8 +32,10 @@ export default function reducer(state=defaultState, action) {
         case "SAVE_COURSE_REJECTED": {
             return {...state, fetching: false, error: action.payload}
         }
+        default :
+            return state;
     }
 
-    return state
+
 }
 

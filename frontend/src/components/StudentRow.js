@@ -27,7 +27,8 @@ class StudentRow extends Component {
             <div className={classes.root}>
                 <PhotoBlock/>
                 <StudentInfosBlock styles={{width: "60%"}}/>
-                <IsAttendingBlock  checkboxValue={this.props.checkboxValue} onCheckboxClick={this.props.onCheckboxClick}/>
+                <IsAttendingBlock checkboxValue={this.props.checkboxValue}
+                                  onCheckboxClick={this.props.onCheckboxClick}/>
                 <CommentaryBlock/>
             </div>
         );
