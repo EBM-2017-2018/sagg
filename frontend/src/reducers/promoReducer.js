@@ -15,7 +15,6 @@ export default function reducer(state = defaultState, action) {
         case "GET_PROMOS_FULFILLED": {
             console.log(action.payload)
             return {...state, fetching: true, promos: action.payload.promotions}
-            break;
         }
         case "GET_PROMOS_REJECTED": {
             return {...state, fetching: false, error: action.payload}
@@ -23,6 +22,6 @@ export default function reducer(state = defaultState, action) {
         default :
             return state;
     }
-    
+
 }
 

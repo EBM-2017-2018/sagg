@@ -19,7 +19,6 @@ export default function reducer(state=defaultState, action) {
         case "INPUT_CHANGE" :
 
             return {...state, course: {...state.course, [action.name]:action.value}}
-            break;
 
         case "SAVE_COURSE": {
             return {...state, fetching: true}
@@ -27,7 +26,6 @@ export default function reducer(state=defaultState, action) {
 
         case "SAVE_COURSE_FULFILLED": {
             return {...state, fetching: true, course: action.payload}
-            break;
         }
         case "SAVE_COURSE_REJECTED": {
             return {...state, fetching: false, error: action.payload}
