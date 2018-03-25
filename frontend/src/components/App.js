@@ -7,7 +7,7 @@ import theme from '../theme';
 import GlobalAppBar from './GlobalAppBar';
 import TabBar from './TabBar'
 import AttendanceSheetContent from './AttendanceSheetContent';
-import GroupsContent from "./GroupsContent";
+
 import MyCoursesContent from "./MyCoursesContent";
 
 const styles = theme => ({
@@ -52,8 +52,7 @@ class App extends Component {
                     <TabBar onTabChange={this.handleTabChange} tabValue={this.state.tabSelected}/>
                     {/* You should work mainly in the Content component */}
                     {this.state.tabSelected === 0 ? <AttendanceSheetContent className={classes.content}/> : null}
-                    {this.state.tabSelected === 1 ? <GroupsContent className={classes.content}/> : null}
-                    {this.state.tabSelected === 2 ? <MyCoursesContent className={classes.content}/> : null}
+                    {this.state.tabSelected === 1 ? <MyCoursesContent className={classes.content}/> : null}
 
 
                 </MuiThemeProvider>

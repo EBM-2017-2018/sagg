@@ -2,12 +2,16 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
 
-import CreateCourseModal from "./CreateCourseModal";
+import CreateCourseModal from "./CreateCourse";
 import DateFnsUtils from "material-ui-pickers/utils/date-fns-utils";
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider'
 
 import {Button} from 'material-ui';
 import AttendanceSheet from "./AttendanceSheet";
+import {connect} from "react-redux"
+import {getPromos} from "../actions/promoActions";
+import {refreshToken} from "../actions/loginActions"
+import {toggleButton, toggleAttendanceSheet, toggleCourseForm, saveAttendanceSheet} from "../actions/attendanceActions"
 
 
 class AttendanceSheetContent extends PureComponent {
@@ -20,14 +24,11 @@ class AttendanceSheetContent extends PureComponent {
         className: ''
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            showButton: true,
-            showCourseForm: false,
-            showAttendanceSheet: false
-        };
 
+
+    componentWillMount(){
+        this.props.getPromos();
+        this.props.getToken();
     }
 
     render() {
@@ -36,11 +37,13 @@ class AttendanceSheetContent extends PureComponent {
                 <div className={this.props.className}>
 
 
-                    {this.state.showButton ? <Button variant="raised" color="primary" onClick={this.handleClick}>
+                    {this.props.buttonIsVisible ? <Button variant="raised" color="primary" onClick={this.showCourseForm}>
                         Créer une feuille d'appel</Button> : null}
 
-                    {this.state.showCourseForm ? <CreateCourseModal handleSubmit={this.handleSubmit}/> : null}
-                    {this.state.showAttendanceSheet ? <AttendanceSheet onSave={this.save} discard={this.reset}/> : null}
+                    {this.props.courseFormIsVisible ? <CreateCourseModal showCourseForm={this.showAttendanceSheet}/> : null}
+                    {this.props.attendanceSheetIsVisible ? <AttendanceSheet onSave={this.save} discard={this.reset}/> : null}
+
+                    <h1>{this.props.promos[0] ? this.props.promos[0].membres  : "booth" }</h1>
 
 
                 </div>
@@ -48,83 +51,50 @@ class AttendanceSheetContent extends PureComponent {
         )
     }
 
-    handleClick = () => {
-        this.showCourseForm();
-    }
 
     reset = () => {
-        this.setState(
-            {
-                showButton: true,
-                showCourseForm: false,
-                showAttendanceSheet: false
-            }
-        )
+        this.props.toggleButton(true);
+        this.props.toggleCourseForm(false);
+        this.props.toggleAttendanceSheet(false);
     }
 
 
     showCourseForm = () => {
-        this.setState(
-            {
-                showButton: false,
-                showCourseForm: true,
-                showAttendanceSheet: false
-            }
-        )
+        this.props.toggleButton(false);
+        this.props.toggleCourseForm(true);
     }
 
     showAttendanceSheet = () => {
-        this.setState(
-            {
-                showButton: false,
-                showCourseForm: false,
-                showAttendanceSheet: true
-            }
-        )
+       this.props.toggleCourseForm(false);
+       this.props.toggleAttendanceSheet(true);
     }
 
-    handleSubmit = (event) => {
-        console.log(event);
-        this.showAttendanceSheet();
-        event.preventDefault();
+    submit = () => {
+        //this.props.saveAttendanceSheet(this.props.attendanceSheet);
+        this.reset();
     }
 
 
-    save = () => {
-        const url = 'https://sagg.ebm.nymous.io/api/attendances'
-        const body = {
-            title: "titre",
-            attendees: [
-                {
-                    id: "1",
-                    ishere: true,
-                    comments: "En retard"
-                }
-            ]
-        };
-        console.log(body);
-
-        var myInit = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
-            },
-            mode: 'cors',
-            cache: 'default',
-            body: JSON.stringify(body)
-        }
 
 
-        fetch(url, myInit)
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (data) {
-                console.log(data);
-            })
-            .then(this.toggleForm());
-    }
+
 }
+const mapStateToProps = state => ({
+    promos: state.promos.promos,
+    error: state.promos.error,
+    buttonIsVisible : state.attendance.button.isVisible,
+    courseFormIsVisible : state.attendance.courseForm.isVisible,
+    attendanceSheetIsVisible : state.attendance.attendanceSheet.isVisible,
+})
 
-export default AttendanceSheetContent;
+const mapDispatchToProps = dispatch => ({
+    getPromos: () => dispatch(getPromos()),
+    getToken: ()=> dispatch(refreshToken()),
+    toggleButton: (isVisible) => dispatch(toggleButton(isVisible)),
+    toggleAttendanceSheet: (isVisible) => dispatch(toggleAttendanceSheet(isVisible)),
+    toggleCourseForm : (isVisible) => dispatch(toggleCourseForm(isVisible)),
+    saveAttendanceSheet : (attendanceSheet) => dispatch(saveAttendanceSheet(attendanceSheet))
+})
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(AttendanceSheetContent);

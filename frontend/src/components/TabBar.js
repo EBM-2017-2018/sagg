@@ -27,7 +27,8 @@ class TabBar extends PureComponent {
           .then((response) => console.log(response) || response.json() )
           .then(data => {
             this.setState({ nbCourse: data.courses ? data.courses.length : '' })
-          }) 
+          }
+          ).catch(error => console.log(error))
     }
 
     constructor(props) {
@@ -46,7 +47,6 @@ class TabBar extends PureComponent {
                     onChange={this.props.onTabChange}
                     fullWidth>
                     <Tab label="Feuille d'appel"/>
-                    <Tab label="Groupes"/>
                     <Tab
             label={
               <Badge color="secondary" className={classes.padding} badgeContent={this.state.nbCourse}>

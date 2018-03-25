@@ -1,6 +1,6 @@
 const apiRoute = {
-   sagg: `https://sagg.ebm.nymous.io/api`,
-   linkapp: `https://linkapp.ebm.nymous.io/api`,
+   sagg: `https://sagg.ebm.nymous.io/api/`,
+   linkapp: `https://linkapp.ebm.nymous.io/api/`,
 };
 
 const testTokenProf = {

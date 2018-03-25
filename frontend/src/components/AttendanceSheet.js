@@ -62,11 +62,7 @@ class AttendanceSheet extends Component {
     }
 
 
-    getStudentsOfCourse = () => {
-
-
-    }
-
+    
 
     render() {
         const {classes} = this.props;
