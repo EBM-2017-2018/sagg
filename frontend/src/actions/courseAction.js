@@ -8,7 +8,7 @@ export function saveCourse(promoId, course) {
         const formattedStartHour = format(course.startHour, "HH:mm:ssZ")
         const formattedEndHour = format(course.endHour, "HH:mm:ssZ")
         const body = {
-            title : course.name,
+            title: course.name,
             teacher: course.teacher,
             start_time: `${course.date}T${formattedStartHour}`,
             end_time: `${course.date}T${formattedEndHour}`,
@@ -36,7 +36,7 @@ export function saveCourse(promoId, course) {
                 dispatch({type: "SAVE_COURSE", payload: response.json()})
             })
             .catch((err) => {
-               dispatch({type: "SAVE_COURSE", payload: err})
+                dispatch({type: "SAVE_COURSE", payload: err})
             })
     }
 
@@ -44,11 +44,10 @@ export function saveCourse(promoId, course) {
 }
 
 
-
 export function changeInput(name, value) {
     return {
         type: "INPUT_CHANGE",
-        name : name,
+        name: name,
         value: value
     }
 }

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, TextField, withStyles, MenuItem, Select} from "material-ui";
+import {Button, MenuItem, Select, TextField, withStyles} from "material-ui";
 import {DatePicker, TimePicker} from 'material-ui-pickers';
 import {connect} from "react-redux"
 import {changeInput, saveCourse} from "../actions/courseAction"
@@ -22,7 +22,6 @@ const styles = theme => ({
     }
 
 });
-
 
 
 class CreateCourse extends Component {
@@ -78,7 +77,7 @@ class CreateCourse extends Component {
                 </label>
 
                 <DatePicker format="DD-MM-YYYY"
-                    leftArrowIcon={<ArrowBack/>}
+                            leftArrowIcon={<ArrowBack/>}
                             rightArrowIcon={<ArrowForward/>} value={this.props.course.date}
                             onChange={this.handleDateChange}/>
 
@@ -86,12 +85,14 @@ class CreateCourse extends Component {
                     Heure de début du cours
 
                 </label>
-                <TimePicker format="HH:mm" value={this.props.course.startHour} ampm={false} onChange={this.handleStartHourChange}/>
+                <TimePicker format="HH:mm" value={this.props.course.startHour} ampm={false}
+                            onChange={this.handleStartHourChange}/>
 
                 <label className={classes.formElement}>
                     Heure de fin du cours
                 </label>
-                <TimePicker format="HH:mm" value={this.props.course.endHour} ampm={false} onChange={this.handleEndHourChange}/>
+                <TimePicker format="HH:mm" value={this.props.course.endHour} ampm={false}
+                            onChange={this.handleEndHourChange}/>
 
 
                 <Button className={classes.formElement} variant="raised" color="primary" type="submit">Créer</Button>
@@ -141,8 +142,8 @@ class CreateCourse extends Component {
 
     getPromoId = (promoName) => {
         const promos = this.props.promos;
-        for (let i = 0; i < promos.length; i++){
-            if (promoName === promos[i].nomPromo){
+        for (let i = 0; i < promos.length; i++) {
+            if (promoName === promos[i].nomPromo) {
                 return promos[i]._id;
             }
         }
@@ -151,6 +152,7 @@ class CreateCourse extends Component {
 
 
 }
+
 const mapStateToProps = state => ({
     course: state.course.course,
     courseFetched: state.course.fetched,
@@ -161,7 +163,7 @@ const mapDispatchToProps = dispatch => ({
     changeValue: (name, value) => dispatch(changeInput(name, value)),
     saveCourse: (promoId, course) => dispatch(saveCourse(promoId, course)),
     toggleAttendanceSheet: (isVisible) => dispatch(toggleAttendanceSheet(isVisible)),
-    toggleCourseForm : (isVisible) => dispatch(toggleCourseForm(isVisible)),
+    toggleCourseForm: (isVisible) => dispatch(toggleCourseForm(isVisible)),
 })
 
 

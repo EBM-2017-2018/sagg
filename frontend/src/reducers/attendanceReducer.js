@@ -53,10 +53,18 @@ export default function reducer(state = defaultState, action) {
             const nbstudents = membres.length;
 
             let students = [];
-            for(let i = 0; i < nbstudents; i++){
-                students.push({username: membres[i] , isAttending: false, commentary: "", photo_url: null, nom: '', prenom: '', email: ''})
+            for (let i = 0; i < nbstudents; i++) {
+                students.push({
+                    username: membres[i],
+                    isAttending: false,
+                    commentary: "",
+                    photo_url: null,
+                    nom: '',
+                    prenom: '',
+                    email: ''
+                })
             }
-            return {...state, fetched: true, promo: action.payload.promotion, students : students}
+            return {...state, fetched: true, promo: action.payload.promotion, students: students}
         }
         case "GET_PROMO_REJECTED": {
             return {...state, fetching: false, error: action.payload}
@@ -64,17 +72,40 @@ export default function reducer(state = defaultState, action) {
         case "TOGGLE_CHECKBOX" :
             const checkboxKey = action.checkboxKey;
 
-            return {...state,  students: state.students.map((el , index) => checkboxKey === index ? {...el, isAttending: !el.isAttending} : el)}
+            return {
+                ...state,
+                students: state.students.map((el, index) => checkboxKey === index ? {
+                    ...el,
+                    isAttending: !el.isAttending
+                } : el)
+            }
 
         case "CHANGE_COMMENTARY":
             const commentaryKey = action.commentaryKey;
-            return {...state,  students: state.students.map((el, index) => commentaryKey === index ? {...el, commentary: action.payload} : el)}
+            return {
+                ...state,
+                students: state.students.map((el, index) => commentaryKey === index ? {
+                    ...el,
+                    commentary: action.payload
+                } : el)
+            }
 
         case "GET_PROFILE_PICTURE":
             return {...state, fetching: true}
+
         case "GET_PROFILE_PICTURE_FULFILLED":
-            username = action.payload.username;
-            return {...state, fetching: false, students: state.students.map(el => el.username === username ? {...el, photo_url: action.payload} : el)}
+            username = action.username
+
+            return {
+                ...state,
+                fetching: false,
+                students: state.students.map(el => el.username === username ? {
+                    ...el,
+                    photoExist: action.payload.ok
+                } : el)
+            }
+
+
         case "GET_PROFILE_PICTURE_REJECTED":
             return {...state, fetching: false, error: action.payload}
 
@@ -85,11 +116,15 @@ export default function reducer(state = defaultState, action) {
 
             username = action.payload.username;
 
-            return {...state, fetching: false, students: state.students.map(el => el.username === username ?
-                    {...el, nom: action.payload.nom,
-                        prenom : action.payload.prenom,
-                        email : action.payload.email
-                    } : el)}
+            return {
+                ...state, fetching: false, students: state.students.map(el => el.username === username ?
+                    {
+                        ...el, nom: action.payload.nom,
+                        prenom: action.payload.prenom,
+                        email: action.payload.email
+                    } : el)
+            }
+
         case "GET_STUDENT_INFOS_REJECTED":
             return {...state, fetching: false, error: action.payload}
 

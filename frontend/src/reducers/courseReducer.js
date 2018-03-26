@@ -1,5 +1,3 @@
-import {apiRoute} from "../config/routes";
-
 const defaultState = {
     course: {
         name: '',

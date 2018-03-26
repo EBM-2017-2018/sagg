@@ -77,8 +77,8 @@ export function getPromo(nomPromo) {
                 dispatch({type: "GET_PROMO", payload: data})
                 return data;
             })
-            .then(function (data){
-                for(var i = 0; i < data.promotion.membres.length; i++){
+            .then(function (data) {
+                for (var i = 0; i < data.promotion.membres.length; i++) {
                     let student = data.promotion.membres[i];
                     dispatch(getProfilePicture(student));
                     dispatch(getStudentInfo(student));
@@ -102,7 +102,7 @@ export function toggleCheckbox(checkboxKey) {
 
 }
 
-export function changeCommentary(commentaryKey, payload){
+export function changeCommentary(commentaryKey, payload) {
     return {
         type: "CHANGE_COMMENTARY",
         commentaryKey,
@@ -110,15 +110,15 @@ export function changeCommentary(commentaryKey, payload){
     }
 }
 
-export function getProfilePicture(username){
-    return function(dispatch) {
+export function getProfilePicture(username) {
+    return function (dispatch) {
         const url = `${apiRoute.linkapp}pictures/file/${username}`;
 
 
         var settings = {
             method: 'GET',
             headers: {
-                'Authorization': testTokenProf.access_token,
+                //'Authorization': testTokenProf.access_token,
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
 
@@ -129,18 +129,17 @@ export function getProfilePicture(username){
 
         fetch(url, settings)
             .then(function (response) {
-
-                dispatch({type: "GET_PROFILE_PICTURE", payload: response})
+                dispatch({type: "GET_PROFILE_PICTURE_FULFILLED", payload: response, username: username})
             })
             .catch(function (error) {
-                dispatch({type: "GET_PROFILE_PICTURE", payload: error})
+                dispatch({type: "GET_PROFILE_PICTURE_REJECTED", payload: error})
             })
     }
 
 }
 
-export function getStudentInfo(username){
-    return function(dispatch) {
+export function getStudentInfo(username) {
+    return function (dispatch) {
 
         const url = `${apiRoute.linkapp}users/userinfos/${username}`;
 

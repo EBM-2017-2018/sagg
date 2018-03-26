@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import userPhoto from "./../avatar.png"
 import {withStyles} from "material-ui";
-
+import {apiRoute} from "../config/routes";
 
 const styles = theme => ({
     root: {
@@ -26,9 +26,12 @@ class PhotoBlock extends Component {
 
     render() {
         const {classes} = this.props;
+        const photoExist = this.props.student.photoExist;
+        const username = this.props.student.username;
+        const photo_url = photoExist ? `${apiRoute.linkapp}pictures/file/${username}` : userPhoto;
         return (
             <div className={classes.root}>
-                <img alt="profil" className={classes.studentImg} src={userPhoto}/>
+                <img alt="profil" className={classes.studentImg} src={photo_url}/>
             </div>
         );
     }

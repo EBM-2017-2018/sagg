@@ -3,7 +3,7 @@ import {List, withStyles} from 'material-ui';
 import StudentRow from "./StudentRow";
 import ControlsBlock from "./ControlsBlock";
 import {connect} from "react-redux"
-import {getPromo, toggleCheckbox, changeCommentary, getProfilePicture } from "../actions/attendanceActions";
+import {changeCommentary, getPromo, toggleCheckbox} from "../actions/attendanceActions";
 
 
 const studentList = [];
@@ -67,12 +67,9 @@ class AttendanceSheet extends Component {
     }
 
 
-
-
-
     getRows = () => {
         const rows = [];
-        if (!this.props.promo.membres) return ;
+        if (!this.props.promo.membres) return;
         for (var i = 0; i < this.props.promo.membres.length; i++) {
             rows.push(this.renderRow(i));
         }
@@ -81,7 +78,7 @@ class AttendanceSheet extends Component {
     renderRow = (i) => {
         return <StudentRow key={i} onCheckboxClick={this.toggleCheckbox(i)} student={this.props.students[i]}
                            changeCommentary={this.changeCommentary(i)}
-                            />
+        />
     }
     toggleCheckbox = (checkboxKey) => {
         return () => this.props.toggleCheckbox(checkboxKey);
@@ -94,7 +91,6 @@ class AttendanceSheet extends Component {
 }
 
 
-
 const mapStateToProps = state => ({
     course: state.course.course,
     promos: state.promos.promos,
@@ -105,12 +101,10 @@ const mapStateToProps = state => ({
 })
 
 
-
 const mapDispatchToProps = dispatch => ({
     getPromo: (nomPromo) => dispatch(getPromo(nomPromo)),
     toggleCheckbox: (checkboxKey) => dispatch(toggleCheckbox(checkboxKey)),
-    changeCommentary : (key, text) => dispatch(changeCommentary(key, text)),
-
+    changeCommentary: (key, text) => dispatch(changeCommentary(key, text)),
 
 
 })

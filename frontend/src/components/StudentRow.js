@@ -25,11 +25,12 @@ class StudentRow extends Component {
         const {classes} = this.props;
         return (
             <div className={classes.root}>
-                <PhotoBlock/>
+                <PhotoBlock student={this.props.student}/>
                 <StudentInfosBlock styles={{width: "60%"}} student={this.props.student}/>
                 <IsAttendingBlock checkboxValue={this.props.student.isAttending}
                                   onCheckboxClick={this.props.onCheckboxClick}/>
-                <CommentaryBlock commentary={this.props.student.commentary} changeCommentary={this.props.changeCommentary}/>
+                <CommentaryBlock commentary={this.props.student.commentary}
+                                 changeCommentary={this.props.changeCommentary}/>
             </div>
         );
     }
