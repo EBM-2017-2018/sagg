@@ -1,3 +1,5 @@
+import {apiRoute} from "../config/routes";
+
 const defaultState = {
     course: {
         name: '',
@@ -10,6 +12,7 @@ const defaultState = {
     fetching: false,
     fetched: false,
     error: null,
+    response: null
 }
 
 
@@ -25,11 +28,13 @@ export default function reducer(state=defaultState, action) {
         }
 
         case "SAVE_COURSE_FULFILLED": {
-            return {...state, fetching: true, course: action.payload}
+            return {...state, fetched: true, response: action.payload}
         }
         case "SAVE_COURSE_REJECTED": {
             return {...state, fetching: false, error: action.payload}
         }
+
+
         default :
             return state;
     }

@@ -5,6 +5,7 @@ import {connect} from "react-redux"
 import {changeInput, saveCourse} from "../actions/courseAction"
 import {ArrowBack, ArrowForward} from 'material-ui-icons'
 import {toggleAttendanceSheet, toggleCourseForm} from "../actions/attendanceActions";
+import {format} from "date-fns"
 
 
 const styles = theme => ({
@@ -22,18 +23,6 @@ const styles = theme => ({
 
 });
 
-const mapStateToProps = state => ({
-    course: state.course.course,
-    courseFetched: state.course.fetched,
-    promos: state.promos.promos
-})
-
-const mapDispatchToProps = dispatch => ({
-    changeValue: (name, value) => dispatch(changeInput(name, value)),
-    saveCourse: (promoId, course) => dispatch(saveCourse(promoId, course)),
-    toggleAttendanceSheet: (isVisible) => dispatch(toggleAttendanceSheet(isVisible)),
-    toggleCourseForm : (isVisible) => dispatch(toggleCourseForm(isVisible)),
-})
 
 
 class CreateCourse extends Component {
@@ -44,7 +33,7 @@ class CreateCourse extends Component {
 
 
         return (
-            <form className={classes.root} onSubmit={this.props.handleSubmit}>
+            <form className={classes.root} onSubmit={this.submitForm}>
                 <h1>Créer un cours</h1>
 
                 <label className={classes.formElement}>
@@ -88,7 +77,8 @@ class CreateCourse extends Component {
                     Date du cours
                 </label>
 
-                <DatePicker leftArrowIcon={<ArrowBack/>}
+                <DatePicker format="DD-MM-YYYY"
+                    leftArrowIcon={<ArrowBack/>}
                             rightArrowIcon={<ArrowForward/>} value={this.props.course.date}
                             onChange={this.handleDateChange}/>
 
@@ -96,30 +86,37 @@ class CreateCourse extends Component {
                     Heure de début du cours
 
                 </label>
-                <TimePicker value={this.props.course.startHour} ampm={false} onChange={this.handleStartHourChange}/>
+                <TimePicker format="HH:mm" value={this.props.course.startHour} ampm={false} onChange={this.handleStartHourChange}/>
 
                 <label className={classes.formElement}>
                     Heure de fin du cours
                 </label>
-                <TimePicker value={this.props.course.endHour} ampm={false} onChange={this.handleEndHourChange}/>
+                <TimePicker format="HH:mm" value={this.props.course.endHour} ampm={false} onChange={this.handleEndHourChange}/>
 
 
-                <Button className={classes.formElement} variant="raised" color="primary" type="submit"
-                        onClick={this.showAttendanceSheet}>Créer</Button>
+                <Button className={classes.formElement} variant="raised" color="primary" type="submit">Créer</Button>
 
             </form>
 
         );
     }
 
+    submitForm = (event) => {
+        event.preventDefault();
+        this.saveCourse();
+        this.showAttendanceSheet();
+    }
 
     handleDateChange = (date) => {
-        this.props.changeValue("date", date);
+        const formattedDate = format(date, "YYYY-MM-DD")
+        this.props.changeValue("date", formattedDate);
     }
     handleStartHourChange = (hour) => {
+
         this.props.changeValue("startHour", hour);
     }
     handleEndHourChange = (hour) => {
+
         this.props.changeValue("endHour", hour);
     }
 
@@ -133,7 +130,8 @@ class CreateCourse extends Component {
     }
 
     saveCourse = () => {
-        this.props.saveCourse(1, this.props.course)
+        const course = this.props.course;
+        this.props.saveCourse(this.getPromoId(course.promo), course)
     }
 
     showAttendanceSheet = () => {
@@ -141,7 +139,30 @@ class CreateCourse extends Component {
         this.props.toggleAttendanceSheet(true);
     }
 
+    getPromoId = (promoName) => {
+        const promos = this.props.promos;
+        for (let i = 0; i < promos.length; i++){
+            if (promoName === promos[i].nomPromo){
+                return promos[i]._id;
+            }
+        }
+        return undefined;
+    }
+
 
 }
+const mapStateToProps = state => ({
+    course: state.course.course,
+    courseFetched: state.course.fetched,
+    promos: state.promos.promos
+})
+
+const mapDispatchToProps = dispatch => ({
+    changeValue: (name, value) => dispatch(changeInput(name, value)),
+    saveCourse: (promoId, course) => dispatch(saveCourse(promoId, course)),
+    toggleAttendanceSheet: (isVisible) => dispatch(toggleAttendanceSheet(isVisible)),
+    toggleCourseForm : (isVisible) => dispatch(toggleCourseForm(isVisible)),
+})
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CreateCourse));

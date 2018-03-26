@@ -34,11 +34,15 @@ class CommentaryBlock extends Component {
         return (
             <div className={classes.root}>
                 <p className={classes.title}>Commentaires</p>
-                <textarea className={classes.textArea}/>
+                <textarea className={classes.textArea} value={this.props.commentaire} onChange={this.changeCommentary}/>
             </div>
         );
     }
 
+    changeCommentary = event => {
+        const value = event.target.value;
+        this.props.changeCommentary(value);
+    }
 }
 
 export default withStyles(styles)(CommentaryBlock);

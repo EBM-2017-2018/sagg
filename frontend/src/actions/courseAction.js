@@ -1,8 +1,18 @@
 import {apiRoute, testTokenProf} from "../config/routes";
+import {format} from "date-fns";
 
 export function saveCourse(promoId, course) {
     return function (dispatch) {
         dispatch({type: "SAVE_COURSE"});
+
+        const formattedStartHour = format(course.startHour, "HH:mm:ssZ")
+        const formattedEndHour = format(course.endHour, "HH:mm:ssZ")
+        const body = {
+            title : course.name,
+            teacher: course.teacher,
+            start_time: `${course.date}T${formattedStartHour}`,
+            end_time: `${course.date}T${formattedEndHour}`,
+        }
 
 
         const url = `${apiRoute.sagg}promos/${promoId}/courses`;
@@ -17,7 +27,7 @@ export function saveCourse(promoId, course) {
             },
             mode: 'cors',
             cache: 'default',
-            body: course
+            body: JSON.stringify(body)
         }
 
 
@@ -26,10 +36,13 @@ export function saveCourse(promoId, course) {
                 dispatch({type: "SAVE_COURSE", payload: response.json()})
             })
             .catch((err) => {
-                dispatch({type: "SAVE_COURSE", payload: err})
+               dispatch({type: "SAVE_COURSE", payload: err})
             })
     }
+
+
 }
+
 
 
 export function changeInput(name, value) {
