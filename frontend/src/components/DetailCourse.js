@@ -1,15 +1,10 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from 'material-ui/styles';
-import List, {ListItem, ListItemText} from 'material-ui/List';
-import Avatar from 'material-ui/Avatar';
-import {AppBar, Dialog, Divider, IconButton, Toolbar, Typography} from 'material-ui';
-import SchoolIcon from 'material-ui-icons/School';
-import AssignmentIcon from 'material-ui-icons/Assignment';
-import CloseIcon from 'material-ui-icons/Close';
-import UpdateIcon from 'material-ui-icons/Update';
-import PeopleIcon from 'material-ui-icons/People';
-import lightBlue from 'material-ui/colors/lightBlue';
+import {withStyles} from 'material-ui';
+import {AppBar, Dialog, Divider, IconButton, List, ListItem, ListItemText, Toolbar, Typography} from 'material-ui';
+import {Avatar} from 'material-ui';
+import {AssignmentIcon, CloseIcon, lightBlue, PeopleIcon, SchoolIcon, UpdateIcon} from 'material-ui-icons';
+import {lightBlue} from 'material-ui/colors';
 import moment from 'moment';
 
 

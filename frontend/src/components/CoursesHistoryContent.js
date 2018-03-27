@@ -1,7 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import Select from 'material-ui/Select'
-import {MenuItem} from 'material-ui/Menu';
+import {MenuItem, Select} from 'material-ui';
 import DetailCourse from './DetailCourse';
 import {connect} from 'react-redux'
 
@@ -42,13 +41,13 @@ class promotionsContent extends PureComponent {
             <div align="center">
 
                 <InputLabel htmlFor={"promotions-simple"}>
-                    {this.props.promotions ?  <h3>Veuiller selectionnez une promo</h3> : null}
+                    {this.props.promotions ? <h3>Veuiller selectionnez une promo</h3> : null}
                 </InputLabel>
 
                 {this.props.promotions ?
 
                     <Select
-                        value={this.props.selectedPromo ? this.props.selectedPromo.nomPromo:  ''}
+                        value={this.props.selectedPromo ? this.props.selectedPromo.nomPromo : ''}
                         onChange={this.handlePromoChange}
                         name="selectedPromo"
 
@@ -59,7 +58,7 @@ class promotionsContent extends PureComponent {
 
                         {this.props.promotions ? this.props.promotions.map(promo =>
                             <MenuItem key={promo._id}
-                                value={promo}>
+                                      value={promo}>
                                 {promo.nomPromo}
                             </MenuItem>) : null
                         }
