@@ -3,10 +3,12 @@ import {checkAuthResponse, getAuthHeaders} from 'ebm-auth/dist/browser';
 
 export function getCoursesHistory(promoId) {
     return function (dispatch) {
-        ;
         fetch(`${apiRoute.sagg}promos/${promoId}/courses`, {
             method: 'GET',
-            headers: getAuthHeaders()
+            headers: Object.assign({}, getAuthHeaders(), {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            })
         })
             .then(checkAuthResponse)
             .then(response => dispatch({type: "GET_COURSES_HISTORY", payload: response.json(), meta: {promoId}}))
@@ -19,7 +21,7 @@ export function getListOfPromos() {
     return function (dispatch) {
         fetch(`${apiRoute.linkapp}promos/listpromoofresponsable`, {
             method: 'GET',
-            headers: getAuthHeaders()
+            headers: Object.assign({}, getAuthHeaders(), {'Accept': 'application/json, text/plain, */*' , 'Content-Type': 'application/json'}),
         })
 
             .then(checkAuthResponse)

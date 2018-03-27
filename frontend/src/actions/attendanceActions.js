@@ -30,7 +30,7 @@ export function getPromo(nomPromo) {
 
         var settings = {
             method: 'GET',
-            headers: getAuthHeaders(),
+            headers: Object.assign({}, getAuthHeaders(), {'Accept': 'application/json, text/plain, */*' , 'Content-Type': 'application/json'}),
             mode: 'cors',
         }
 
@@ -83,7 +83,7 @@ export function getProfilePicture(username) {
 
         var settings = {
             method: 'GET',
-            headers: getAuthHeaders()
+            headers: Object.assign({}, getAuthHeaders(), {'Accept': 'application/json, text/plain, */*' , 'Content-Type': 'application/json'}),
 
         }
 
@@ -107,7 +107,7 @@ export function getStudentInfo(username) {
 
         var settings = {
             method: 'GET',
-            headers: getAuthHeaders()
+            headers: Object.assign({}, getAuthHeaders(), {'Accept': 'application/json, text/plain, */*' , 'Content-Type': 'application/json'}),
         }
 
 
@@ -133,7 +133,7 @@ export function saveAttendanceSheet(attendanceSheet, courseId) {
 
         var settings = {
             method: 'PUT',
-            headers: getAuthHeaders(),
+            headers: Object.assign({}, getAuthHeaders(), {'Accept': 'application/json, text/plain, */*' , 'Content-Type': 'application/json'}),
             mode: 'cors',
             body: JSON.stringify(attendanceSheet)
         }

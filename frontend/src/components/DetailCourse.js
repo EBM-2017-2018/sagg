@@ -90,7 +90,7 @@ class DetailCourses extends PureComponent {
         if (!this.state.isDeleted) {
             fetch(`${apiRoute.sagg}promos/courses/${this.props.cours._id}`, {
                 method: 'DELETE',
-                headers: getAuthHeaders
+                headers: Object.assign({}, getAuthHeaders(), {'Accept': 'application/json, text/plain, */*' , 'Content-Type': 'application/json'}),ers
             })
                 .then(checkAuthResponse)
                 .then((response) => console.log(response) || response.json())

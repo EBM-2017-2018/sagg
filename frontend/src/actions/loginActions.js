@@ -12,7 +12,7 @@ export function refreshToken() {
 
         var myInit = {
             method: 'GET',
-            headers: getAuthHeaders(),
+            headers: Object.assign({}, getAuthHeaders(), {'Accept': 'application/json, text/plain, */*' , 'Content-Type': 'application/json'}),
             mode: 'cors',
             cache: 'default'
         }
