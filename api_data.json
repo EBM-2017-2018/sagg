@@ -1,6 +1,88 @@
 [
   {
     "version": "1.0.0-SNAPSHOT",
+    "type": "delete",
+    "url": "/promos/courses/:cid",
+    "title": "deleteCourse",
+    "description": "<p>Supprime un cours</p>",
+    "name": "deleteCourse",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>JWT token</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "cid",
+            "description": "<p>Id du cours</p>"
+          }
+        ]
+      }
+    },
+    "group": "Cours",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>API response</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n success : true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "404": [
+          {
+            "group": "404",
+            "optional": false,
+            "field": "Missing/WrongToken",
+            "description": "<p>Fields</p>"
+          }
+        ],
+        "500": [
+          {
+            "group": "500",
+            "optional": false,
+            "field": "Mongoose",
+            "description": "<p>Error</p>"
+          }
+        ]
+      }
+    },
+    "filename": "src/api/courses/index.js",
+    "groupTitle": "Cours",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:4000/api/promos/courses/:cid"
+      }
+    ]
+  },
+  {
+    "version": "1.0.0-SNAPSHOT",
     "type": "get",
     "url": "/promos/courses",
     "title": "getAllCourses",
