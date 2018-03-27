@@ -8,7 +8,7 @@ import GlobalAppBar from './GlobalAppBar';
 import TabBar from './TabBar'
 import AttendanceSheetContent from './AttendanceSheetContent';
 
-import MyCoursesContent from "./MyCoursesContent";
+import MyCoursesContent from "./CoursesHistoryContent";
 
 const styles = theme => ({
     root: {

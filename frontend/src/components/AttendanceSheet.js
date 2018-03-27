@@ -6,7 +6,6 @@ import {connect} from "react-redux"
 import {changeCommentary, getPromo, toggleCheckbox} from "../actions/attendanceActions";
 
 
-const studentList = [];
 const styles = theme => ({
     root: {
         width: "calc(100%-40px)",
@@ -27,10 +26,7 @@ const styles = theme => ({
 
 class AttendanceSheet extends Component {
 
-    constructor(props) {
-        super(props);
 
-    }
 
     componentDidMount() {
 
