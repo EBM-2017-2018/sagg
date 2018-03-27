@@ -22,7 +22,7 @@ app.use('/api', require('ebm-auth').requireAuth({
 app.use(serveStatic('./public'));
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', '404.html'));
+  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
 server.listen(config.app.port, (err) => {
