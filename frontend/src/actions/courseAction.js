@@ -21,7 +21,7 @@ export function saveCourse(promoId, course) {
 
         var myInit = {
             method: 'POST',
-            headers: getAuthHeaders(),
+            headers: Object.assign({}, getAuthHeaders(), {'Accept': 'application/json, text/plain, */*' , 'Content-Type': 'application/json'})
             mode: 'cors',
             cache: 'default',
             body: JSON.stringify(body)
