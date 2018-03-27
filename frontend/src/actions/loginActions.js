@@ -1,5 +1,5 @@
 import {apiRoute} from "../config/routes";
-import { checkAuthResponse, getAuthHeaders } from 'ebm-auth/dist/browser';
+import {checkAuthResponse, getAuthHeaders} from 'ebm-auth/dist/browser';
 
 
 export function refreshToken() {

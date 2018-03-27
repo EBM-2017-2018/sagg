@@ -1,7 +1,9 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {AppBar, Badge, Tab, Tabs, withStyles} from 'material-ui';
-import {apiRoute, testTokenProf} from '../config/routes';
+import {apiRoute} from '../config/routes';
+import {checkAuthResponse, getAuthHeaders} from 'ebm-auth/dist/browser';
+
 
 const styles = theme => ({
     padding: {
@@ -17,13 +19,14 @@ class TabBar extends PureComponent {
 
 
     componentDidMount() {
-        fetch(`${apiRoute.sagg}/promos/courses`, {
+        fetch(`${apiRoute.sagg}promos/courses`, {
             method: 'GET',
             headers: {
-                'Authorization': testTokenProf.access_token
+                headers: getAuthHeaders(),
             }
 
         })
+            .then(checkAuthResponse)
             .then((response) => console.log(response) || response.json())
             .then(data => {
                     this.setState({nbCourse: data.courses ? data.courses.length : ''})

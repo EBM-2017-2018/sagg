@@ -1,7 +1,7 @@
 const defaultState = {
-    fetching : true,
-    selectedCourses : [],
-    selectedPromo : {},
+    fetching: true,
+    selectedCourses: [],
+    selectedPromo: {},
     error: null
 };
 
@@ -14,7 +14,12 @@ export default function reducer(state = defaultState, action) {
         }
 
         case "GET_COURSES_HISTORY_FULFILLED": {
-            return {...state, fetching: true, selectedCourses: action.payload.courses, selectedPromo: state.promotions.find(e => e._id === action.meta.promoId)}
+            return {
+                ...state,
+                fetching: true,
+                selectedCourses: action.payload.courses,
+                selectedPromo: state.promotions.find(e => e._id === action.meta.promoId)
+            }
         }
         case "GET_COURSES_HISTORY_REJECTED": {
             return {...state, fetching: false, error: action.payload}
@@ -32,7 +37,7 @@ export default function reducer(state = defaultState, action) {
         }
 
         case "PROMO_CHANGE": {
-            return {...state, selectedPromoId : action.promoId}
+            return {...state, selectedPromoId: action.promoId}
         }
         default :
             return state;

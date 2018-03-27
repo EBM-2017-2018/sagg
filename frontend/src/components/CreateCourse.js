@@ -22,9 +22,10 @@ const styles = theme => ({
     },
     formElement: {
         margin: "15px 0",
+
     },
 
-    button:{
+    button: {
         margin: "25px 0"
     }
 
@@ -45,14 +46,14 @@ class CreateCourse extends Component {
                 <label className={classes.formElement}>
                     Intitulé du cours
                 </label>
-                <TextField style={{alignItem: "center"}}name="name" placeholder="Intitulé du cours" onChange={this.handleInputChange}
-                           value={this.props.course.name}/>
+                <TextField name="name" placeholder="Intitulé du cours" onChange={this.handleInputChange}
+                           value={this.props.course.name} onKeyPress={this.preventSubmit}/>
 
                 <label className={classes.formElement}>
                     Nom du professeur
                 </label>
                 <TextField name="teacher" placeholder="Nom du professeur" onChange={this.handleInputChange}
-                           value={this.props.course.teacher}/>
+                           value={this.props.course.teacher} onKeyPress={this.preventSubmit}/>
 
                 <label className={classes.formElement}>
                     Promo
@@ -63,7 +64,6 @@ class CreateCourse extends Component {
                         onChange={this.handleInputChange}
                         value={this.props.course.promo}
                         name="promo"
-
                         style={{
                             width: '200px',
                             textAlign: 'center'
@@ -107,6 +107,12 @@ class CreateCourse extends Component {
             </form>
 
         );
+    }
+
+    preventSubmit = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+        }
     }
 
     submitForm = (event) => {

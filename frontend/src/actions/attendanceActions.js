@@ -1,4 +1,5 @@
-import {apiRoute, testTokenProf} from "../config/routes";
+import {apiRoute} from "../config/routes";
+import {checkAuthResponse, getAuthHeaders} from 'ebm-auth/dist/browser';
 
 export function toggleButton(payload) {
     return {
@@ -29,17 +30,13 @@ export function getPromo(nomPromo) {
 
         var settings = {
             method: 'GET',
-            headers: {
-                'Authorization': testTokenProf.access_token,
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
-
-            },
+            headers: getAuthHeaders(),
             mode: 'cors',
         }
 
 
         fetch(url, settings)
+            .then(checkAuthResponse)
             .then(function (response) {
                 var data = response.json()
                 dispatch({type: "GET_PROMO", payload: data})
@@ -59,6 +56,7 @@ export function getPromo(nomPromo) {
 
     }
 }
+
 
 export function toggleCheckbox(checkboxKey) {
 
@@ -85,17 +83,13 @@ export function getProfilePicture(username) {
 
         var settings = {
             method: 'GET',
-            headers: {
-                //'Authorization': testTokenProf.access_token,
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
+            headers: getAuthHeaders()
 
-            },
-            mode: 'cors',
         }
 
 
         fetch(url, settings)
+            .then(checkAuthResponse)
             .then(function (response) {
                 dispatch({type: "GET_PROFILE_PICTURE_FULFILLED", payload: response, username: username})
             })
@@ -113,17 +107,12 @@ export function getStudentInfo(username) {
 
         var settings = {
             method: 'GET',
-            headers: {
-                'Authorization': testTokenProf.access_token,
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
-
-            },
-            mode: 'cors',
+            headers: getAuthHeaders()
         }
 
 
         fetch(url, settings)
+            .then(checkAuthResponse)
             .then(function (response) {
                 dispatch({type: "GET_STUDENT_INFOS", payload: response.json()})
             })
@@ -144,18 +133,15 @@ export function saveAttendanceSheet(attendanceSheet, courseId) {
 
         var settings = {
             method: 'PUT',
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json',
-                'Authorization': testTokenProf.access_token,
-            },
+            headers: getAuthHeaders(),
             mode: 'cors',
             body: JSON.stringify(attendanceSheet)
         }
 
-        console.log (attendanceSheet);
+        console.log(attendanceSheet);
 
         fetch(url, settings)
+            .then(checkAuthResponse)
             .then(function (response) {
                 dispatch({type: "SAVE_ATTENDANCE_SHEET", payload: response.json()})
             })

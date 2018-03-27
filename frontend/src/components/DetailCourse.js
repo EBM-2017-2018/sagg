@@ -2,7 +2,8 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {
     AppBar,
-    Avatar, Button,
+    Avatar,
+    Button,
     Dialog,
     Divider,
     IconButton,
@@ -22,7 +23,8 @@ import PeopleIcon from 'material-ui-icons/People';
 import lightBlue from 'material-ui/colors/lightBlue';
 import moment from 'moment';
 import {HighlightOff} from 'material-ui-icons'
-import {apiRoute, testTokenProf} from "../config/routes";
+import {apiRoute} from "../config/routes";
+import {checkAuthResponse, getAuthHeaders} from "ebm-auth/dist/browser";
 
 
 const styles = theme => ({
@@ -88,11 +90,9 @@ class DetailCourses extends PureComponent {
         if (!this.state.isDeleted) {
             fetch(`${apiRoute.sagg}promos/courses/${this.props.cours._id}`, {
                 method: 'DELETE',
-                headers: {
-                    'Authorization': testTokenProf.access_token
-                }
-
+                headers: getAuthHeaders
             })
+                .then(checkAuthResponse)
                 .then((response) => console.log(response) || response.json())
                 .then(() => {
                     this.setState({deleteText: "Terminer", isDeleted: true})
@@ -122,7 +122,7 @@ class DetailCourses extends PureComponent {
                     width: "60px",
                     height: "60px",
                     color: "red",
-                    zIndex: "100"
+                    zIndex: "-1"
                 }} onClick={this.handleCloseClick}/>
 
                 <List>

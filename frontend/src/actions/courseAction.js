@@ -1,4 +1,5 @@
-import {apiRoute, testTokenProf} from "../config/routes";
+import {apiRoute} from "../config/routes";
+import {checkAuthResponse, getAuthHeaders} from 'ebm-auth/dist/browser';
 import {format} from "date-fns";
 
 export function saveCourse(promoId, course) {
@@ -20,11 +21,7 @@ export function saveCourse(promoId, course) {
 
         var myInit = {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json',
-                'Authorization': testTokenProf.access_token
-            },
+            headers: getAuthHeaders(),
             mode: 'cors',
             cache: 'default',
             body: JSON.stringify(body)
@@ -32,6 +29,7 @@ export function saveCourse(promoId, course) {
 
 
         fetch(url, myInit)
+            .then(checkAuthResponse)
             .then(function (response) {
                 dispatch({type: "SAVE_COURSE", payload: response.json()})
             })
@@ -42,8 +40,6 @@ export function saveCourse(promoId, course) {
 
 
 }
-
-
 
 
 export function changeInput(name, value) {

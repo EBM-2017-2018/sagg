@@ -14,7 +14,6 @@ import {refreshToken} from "../actions/loginActions"
 import {toggleAttendanceSheet, toggleButton, toggleCourseForm} from "../actions/attendanceActions"
 
 
-
 class AttendanceSheetContent extends PureComponent {
 
     static propTypes = {
@@ -35,7 +34,6 @@ class AttendanceSheetContent extends PureComponent {
         return (
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <div className={this.props.className}>
-
 
 
                     {this.props.buttonIsVisible ?
@@ -70,7 +68,6 @@ class AttendanceSheetContent extends PureComponent {
         this.props.toggleAttendanceSheet(true);
 
     }
-
 
 
 }

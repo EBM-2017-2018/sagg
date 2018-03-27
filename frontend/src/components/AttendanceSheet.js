@@ -3,8 +3,8 @@ import {List, withStyles} from 'material-ui';
 import StudentRow from "./StudentRow";
 import ControlsBlock from "./ControlsBlock";
 import {connect} from "react-redux"
-import {changeCommentary, getPromo, toggleCheckbox, saveAttendanceSheet} from "../actions/attendanceActions";
-import { ToastContainer, toast } from 'react-toastify';
+import {changeCommentary, getPromo, saveAttendanceSheet, toggleCheckbox} from "../actions/attendanceActions";
+import {toast, ToastContainer} from 'react-toastify';
 
 
 const styles = theme => ({

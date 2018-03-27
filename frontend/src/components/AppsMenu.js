@@ -15,7 +15,7 @@ const styles = theme => ({
         width: 300,
         padding: '20px 15px',
         backgroundColor: theme.palette.background.paper,
-        
+
     }
 });
 
