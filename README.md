@@ -1,12 +1,12 @@
 EBM SAGG
 ===============
 
-[![Build Status](https://travis-ci.org/EBM-2017-2018/EBM-boilerplate.svg?branch=master)](https://travis-ci.org/EBM-2017-2018/EBM-boilerplate)
-[![Maintainability](https://api.codeclimate.com/v1/badges/7b5e67d7a1c25ebd47d0/maintainability)](https://codeclimate.com/github/EBM-2017-2018/EBM-boilerplate/maintainability)
+[![Build Status](https://travis-ci.org/EBM-2017-2018/EBM-Sagg.svg?branch=master)](https://travis-ci.org/EBM-2017-2018/EBM-Sagg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/7b5e67d7a1c25ebd47d0/maintainability)](https://codeclimate.com/github/EBM-2017-2018/EBM-Sagg/maintainability)
 
 **Frontend :**
 
-[![codecov](https://codecov.io/gh/EBM-2017-2018/EBM-boilerplate/branch/master/graph/badge.svg)](https://codecov.io/gh/EBM-2017-2018/EBM-boilerplate)
+[![codecov](https://codecov.io/gh/EBM-2017-2018/EBM-Sagg/branch/master/graph/badge.svg)](https://codecov.io/gh/EBM-2017-2018/EBM-Sagg)
 
 Ce dépôt fournit les éléments de base pour les projets du fil rouge.
 
@@ -17,10 +17,10 @@ Il comprend :
 
 ## Mode d'emploi
 
-1. `git clone https://github.com/EBM-2017-2018/EBM-boilerplate.git`
+1. `git clone https://github.com/EBM-2017-2018/EBM-Sagg.git`
 2. Créer un dépôt pour votre projet à l'adresse https://github.com/organizations/EBM-2017-2018/repositories/new
 3. Récupérer l'URL du projet, accessible depuis le bouton "Clone or download"
-4. `git remote add upstream https://github.com/EBM-2017-2018/EBM-boilerplate.git`
+4. `git remote add upstream https://github.com/EBM-2017-2018/EBM-Sagg.git`
 5. `git remote set-url origin <adresse de votre dépôt récupérée à l'étape 3>` (exemple : `git remote set-url origin https://github.com/EBM-2017-2018/OKLM.git`)
 6. Aller sur https://travis-ci.org/, se connecter avec son compte Github, et dans l'organisation EBM-2017-2018, activer Travis pour votre projet Github.
 7. Générer un token Github pour l'APIDoc : Aller ici : https://github.com/settings/tokens, cliquer sur "Generate new token" et cocher le bloc "repo". Choisissez un nom pour le token et cliquez sur "Generate token". Copiez en le token qui s'affiche.
@@ -80,19 +80,19 @@ Le bloc `services` décrit les différents containers dont notre projet a besoin
 
 1. Image Docker
 
-Il y aura obligatoirement un premier service appelé `web` qui définit le container NodeJS correspondant au serveur web NodeJS. On commence par indiquer à partir de quelle image est instanciée le container (`image: ebm1718travis/ebm-boilerplate:latest`) : il faut donc remplacer ebm-boilerplate sur cette ligne par le nom de votre projet sur Github.
+Il y aura obligatoirement un premier service appelé `web` qui définit le container NodeJS correspondant au serveur web NodeJS. On commence par indiquer à partir de quelle image est instanciée le container (`image: ebm1718travis/ebm-Sagg:latest`) : il faut donc remplacer ebm-Sagg sur cette ligne par le nom de votre projet sur Github.
 
 **Attention :** il est indispensable que le nom corresponde bien à celui sur Github, en minuscules (celui qui est écrit derrière EBM-2017-2018 sur la page de votre dépôt). C'est le nom utilisé par Travis pour publier votre image, et le déploiement ne fonctionnera pas si les noms ne correspondent pas.
 
 2. Variables d'environnement
 
-On définit ensuite les variables d'environnement qui doivent être mises en place au lancement du container, par exemple l'URI à laquelle est disponible MongoDB. Reportez-vous à celle déjà indiquée dans le fichier `docker-compose.yml` pour en rajouter si besoin, et pensez à modifier l'URI de MongoDB pour remplacer `ebm-boilerplate` par le nom de votre collection.
+On définit ensuite les variables d'environnement qui doivent être mises en place au lancement du container, par exemple l'URI à laquelle est disponible MongoDB. Reportez-vous à celle déjà indiquée dans le fichier `docker-compose.yml` pour en rajouter si besoin, et pensez à modifier l'URI de MongoDB pour remplacer `ebm-Sagg` par le nom de votre collection.
 
 3. Interfaces réseaux
 
 On définit ensuite les interfaces réseaux auxquelles est rattaché le container. Il y a a priori deux interfaces réseaux possibles.
 
-L'interface ebm-filrouge permet aux différents projets fil rouge de communiquer entre eux, il ne faut donc y rattacher que les containers qui ont besoin d'être rendus accessibles aux autres groupes. Ce devrait être uniquement le cas, sauf cas particulier, de votre serveur web NodeJS. Pour cette interface réseau, il faut définir un alias qui correspondra à l'URL à laquelle les autres projets contacteront votre service. Par exemple ici : l'alias `ebm-boilerplate` défini dans le bloc `aliases` rend le service web accessible à l'URL `http://ebm-boilerplate/api/whatever`. Remplacez donc `ebm-boilerplate` par celui de votre projet.
+L'interface ebm-filrouge permet aux différents projets fil rouge de communiquer entre eux, il ne faut donc y rattacher que les containers qui ont besoin d'être rendus accessibles aux autres groupes. Ce devrait être uniquement le cas, sauf cas particulier, de votre serveur web NodeJS. Pour cette interface réseau, il faut définir un alias qui correspondra à l'URL à laquelle les autres projets contacteront votre service. Par exemple ici : l'alias `ebm-Sagg` défini dans le bloc `aliases` rend le service web accessible à l'URL `http://ebm-Sagg/api/whatever`. Remplacez donc `ebm-Sagg` par celui de votre projet.
 
 L'interface `local` sert à relier les différents containers que vous utilisez pour votre projet, par exemple le serveur web NodeJS et une base de données mongodb. Inutile d'indiquer un alias pour cette interface, le nom du service servira directement de nom de domaine : par exemple, le service `mongodb` sera accessible depuis le service `web` à l'adresse `mongodb://mongodb/`.
 
@@ -135,7 +135,7 @@ networks:
     external: true
 ```
 
-Une fois que tout ça est fait, mets tout ça sur master sans trop réfléchir, et prie un bon coup (il parait que ça aide). Plus concrètement, il faut attendre que le build de la branche master soit fait sur Travis (compter environ 5 minutes). Comptez ensuite quelques minutes supplémentaires pour que votre projet soit déployé sur le serveur fil rouge. Une fois que c'est fait, si tout a marché, vous devriez pouvoir voir votre travail sur [https://[LâcheIciLeNomDeTonProjetGithub].ebm.nymous.io](https://[LâcheIciLeNomDeTonProjetGithub].ebm.nymous.io) (exemple : https://ebm-boilerplate.ebm.nymous.io`).
+Une fois que tout ça est fait, mets tout ça sur master sans trop réfléchir, et prie un bon coup (il parait que ça aide). Plus concrètement, il faut attendre que le build de la branche master soit fait sur Travis (compter environ 5 minutes). Comptez ensuite quelques minutes supplémentaires pour que votre projet soit déployé sur le serveur fil rouge. Une fois que c'est fait, si tout a marché, vous devriez pouvoir voir votre travail sur [https://[LâcheIciLeNomDeTonProjetGithub].ebm.nymous.io](https://[LâcheIciLeNomDeTonProjetGithub].ebm.nymous.io) (exemple : https://ebm-Sagg.ebm.nymous.io`).
 
 Si ce n'est pas le cas, et qu'au bout de longues minutes d'attente il ne se passe toujours rien, appelle-nous. On pleurera avec toi.
 
