@@ -5,7 +5,7 @@ import DetailCourse from './DetailCourse';
 import {connect} from 'react-redux'
 
 import {changePromo, getCoursesHistory, getListOfPromos} from "../actions/coursesHistoryActions";
-import InputLabel from "material-ui/es/Input/InputLabel";
+import {InputLabel} from "material-ui/";
 
 
 class promotionsContent extends PureComponent {
