@@ -13,7 +13,7 @@ class StudentInfosBlock extends Component {
                 minWidth: "250px",
                 heigth: "100%",
                 boxSizing: "border-box",
-                
+
             }}>
                 <p>{this.props.student.nom}</p>
                 <p>{this.props.student.prenom}</p>

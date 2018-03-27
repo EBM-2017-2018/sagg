@@ -4,6 +4,7 @@ import StudentRow from "./StudentRow";
 import ControlsBlock from "./ControlsBlock";
 import {connect} from "react-redux"
 import {changeCommentary, getPromo, toggleCheckbox, saveAttendanceSheet} from "../actions/attendanceActions";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const styles = theme => ({
@@ -40,6 +41,7 @@ class AttendanceSheet extends Component {
 
         return (
             <div className={classes.root}>
+                <ToastContainer/>
                 <header className={classes.header}>
                     <p style={{
                         width: "auto",
@@ -94,6 +96,11 @@ class AttendanceSheet extends Component {
             })
         };
         this.props.saveAttendanceSheet(attendees, courseId);
+        this.notify();
+    }
+
+    notify = () => {
+        toast("Feuille de présence sauvegardée !")
     }
 
 }
