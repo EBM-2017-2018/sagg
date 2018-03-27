@@ -25,6 +25,7 @@ module.exports.create = (req, res) => {
     }
     return res.status(201).json({
       success: true,
+      id: course._id, //eslint-disable-line
     });
   });
   return null;

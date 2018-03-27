@@ -139,7 +139,8 @@ router.get('/:pid/courses', controller.findAll);
  * @apiSuccess {Boolean} success API response
  * @apiSuccessExample {json} Success-Response:
  *{
- * success : true
+ * success : true,
+ * id: 8bd030299F020202
  * }
 
  *
