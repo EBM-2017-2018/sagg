@@ -3,7 +3,7 @@ import {List, withStyles} from 'material-ui';
 import StudentRow from "./StudentRow";
 import ControlsBlock from "./ControlsBlock";
 import {connect} from "react-redux"
-import {changeCommentary, getPromo, toggleCheckbox} from "../actions/attendanceActions";
+import {changeCommentary, getPromo, toggleCheckbox, saveAttendanceSheet} from "../actions/attendanceActions";
 
 
 const styles = theme => ({
@@ -25,7 +25,6 @@ const styles = theme => ({
 });
 
 class AttendanceSheet extends Component {
-        //test
 
 
     componentDidMount() {
@@ -51,11 +50,11 @@ class AttendanceSheet extends Component {
                         padding: "40px"
                     }}>Feuille d'appel</p>
                     {/*<ControlsBlock onSave={this.props.onSave} discard={this.props.discard}>*/}
-                    <ControlsBlock onSave={this.showState} discard={this.props.discard}/>
+                    <ControlsBlock onSave={this.saveAttendanceSheet} discard={this.props.reset}/>
                 </header>
                 <List className={classes.list}>{this.getRows()}</List>
                 <footer className={classes.header}>
-                    <ControlsBlock onSave={this.props.onSave} discard={this.props.discard}/>
+                    <ControlsBlock onSave={this.saveAttendanceSheet} discard={this.props.reset}/>
                 </footer>
 
             </div>
@@ -84,6 +83,13 @@ class AttendanceSheet extends Component {
         return (text) => this.props.changeCommentary(key, text);
     }
 
+    saveAttendanceSheet = () => {
+        const courseId = this.props.course.courseId;
+        const attendees = this.props.students.map(el => {return {
+            username: el.username, ishere: el.isAttending, comments: el.commentary}})
+        saveAttendanceSheet(attendees, courseId);
+    }
+
 }
 
 
@@ -101,8 +107,7 @@ const mapDispatchToProps = dispatch => ({
     getPromo: (nomPromo) => dispatch(getPromo(nomPromo)),
     toggleCheckbox: (checkboxKey) => dispatch(toggleCheckbox(checkboxKey)),
     changeCommentary: (key, text) => dispatch(changeCommentary(key, text)),
-
-
+    saveAttendanceSheet:  (attendees, courseId) => dispatch(saveAttendanceSheet(attendees, courseId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(AttendanceSheet));

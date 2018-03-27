@@ -1,5 +1,6 @@
 const defaultState = {
     course: {
+        courseId : '',
         name: '',
         teacher: '',
         promo: '',
@@ -10,7 +11,6 @@ const defaultState = {
     fetching: false,
     fetched: false,
     error: null,
-    response: null
 }
 
 
@@ -26,7 +26,7 @@ export default function reducer(state=defaultState, action) {
         }
 
         case "SAVE_COURSE_FULFILLED": {
-            return {...state, fetched: true, response: action.payload}
+            return {...state, fetched: true, course:{ ...state.course, courseId: action.payload.id }}
         }
         case "SAVE_COURSE_REJECTED": {
             return {...state, fetching: false, error: action.payload}

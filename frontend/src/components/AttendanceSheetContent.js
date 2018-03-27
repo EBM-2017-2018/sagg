@@ -43,9 +43,8 @@ class AttendanceSheetContent extends PureComponent {
                     {this.props.courseFormIsVisible ?
                         <CreateCourseModal showCourseForm={this.showAttendanceSheet}/> : null}
                     {this.props.attendanceSheetIsVisible ?
-                        <AttendanceSheet onSave={this.save} discard={this.reset}/> : null}
+                        <AttendanceSheet reset={this.reset}/> : null}
 
-                    <h1>{this.props.promos[0] ? this.props.promos[0].membres : "booth"}</h1>
 
 
                 </div>

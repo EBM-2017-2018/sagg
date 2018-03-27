@@ -21,24 +21,23 @@ export function toggleCourseForm(payload) {
     }
 }
 
-export function saveAttendanceSheet(attendanceSheet) {
+export function saveAttendanceSheet(attendanceSheet, courseId) {
 
     return function (dispatch) {
         dispatch({type: "SAVE_ATTENDANCE_SHEET"});
 
 
-        const url = `${apiRoute}attendances`
+        const url = `${apiRoute}promos/courses/${courseId}`
 
 
         var settings = {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json',
                 'Authorization': testTokenProf.access_token,
             },
             mode: 'cors',
-            cache: 'default',
             body: attendanceSheet
         }
 
