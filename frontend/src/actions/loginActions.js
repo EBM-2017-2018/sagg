@@ -1,4 +1,6 @@
-import {apiRoute, testTokenProf} from "../config/routes";
+import {apiRoute} from "../config/routes";
+import { checkAuthResponse, getAuthHeaders } from 'ebm-auth/dist/browser';
+
 
 export function refreshToken() {
     return function (dispatch) {
@@ -10,17 +12,14 @@ export function refreshToken() {
 
         var myInit = {
             method: 'GET',
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json',
-                'Authorization': testTokenProf.access_token,
-            },
+            headers: getAuthHeaders(),
             mode: 'cors',
             cache: 'default'
         }
 
 
         fetch(url, myInit)
+            .then(checkAuthResponse)
             .then(function (response) {
                 dispatch({type: "GET_TOKEN", payload: response.json().token})
             })

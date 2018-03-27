@@ -25,13 +25,8 @@ class promotionsContent extends PureComponent {
     }
 
     handlePromoChange = (event) => {
-        const promo = event.target.value;
-        console.log("handlePromoChange")
-        console.log(promo);
-        this.props.changePromo(promo);
-
-        const promoId = promo._id;
-
+        const promoId = event.target.value;
+        this.props.changePromo(promoId);
         this.props.getCoursesHistory(promoId);
     }
 
@@ -47,7 +42,7 @@ class promotionsContent extends PureComponent {
                 {this.props.promotions ?
 
                     <Select
-                        value={this.props.selectedPromo ? this.props.selectedPromo.nomPromo : ''}
+                        value={this.props.selectedPromoId ? this.props.selectedPromoId : ''}
                         onChange={this.handlePromoChange}
                         name="selectedPromo"
 
@@ -58,7 +53,7 @@ class promotionsContent extends PureComponent {
 
                         {this.props.promotions ? this.props.promotions.map(promo =>
                             <MenuItem key={promo._id}
-                                      value={promo}>
+                                      value={promo._id}>
                                 {promo.nomPromo}
                             </MenuItem>) : null
                         }
@@ -83,7 +78,7 @@ class promotionsContent extends PureComponent {
 
 const mapStateToProps = state => ({
     selectedCourses: state.coursesHistory.selectedCourses,
-    selectedPromo: state.coursesHistory.selectedPromo,
+    selectedPromoId: state.coursesHistory.selectedPromoId,
     promotions: state.coursesHistory.promotions
 
 })
@@ -91,7 +86,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     getCoursesHistory: (promoId) => dispatch(getCoursesHistory(promoId)),
     getListOfPromos: () => dispatch(getListOfPromos()),
-    changePromo: (promo) => dispatch(changePromo(promo)),
+    changePromo: (promoId) => dispatch(changePromo(promoId)),
 })
 
 

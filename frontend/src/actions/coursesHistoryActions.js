@@ -28,9 +28,9 @@ export function getListOfPromos(){
     }
 }
 
-export function changePromo(promo) {
+export function changePromo(promoId) {
     return {
         type: "PROMO_CHANGE",
-        promo
+        promoId
     }
 }

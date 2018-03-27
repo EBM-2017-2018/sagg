@@ -1,13 +1,7 @@
 const defaultState = {
     fetching : true,
     selectedCourses : [],
-    selectedPromo : {
-        id:  '',
-        nomPromo: '',
-        responsable: '',
-        __v: 0,
-        membres : []
-    },
+    selectedPromo : {},
     error: null
 };
 
@@ -38,7 +32,7 @@ export default function reducer(state = defaultState, action) {
         }
 
         case "PROMO_CHANGE": {
-            return {...state, selectedPromo : action.promo}
+            return {...state, selectedPromoId : action.promoId}
         }
         default :
             return state;
