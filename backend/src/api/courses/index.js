@@ -195,4 +195,27 @@ router.post('/:pid/courses', controller.create);
 
 router.put('/courses/:cid', controller.update);
 
+
+/**
+* @apiVersion 1.0.0-SNAPSHOT
+ * @api {delete} /promos/courses/:cid deleteCourse
+ * @apiDescription Supprime un cours
+ * @apiName deleteCourse
+ * @apiHeader {String} Authorization JWT token
+ * @apiParam {String} cid Id du cours
+ * @apiGroup Cours
+ *
+ * @apiSuccess {Boolean} success API response
+ * @apiSuccessExample {json} Success-Response:
+ *{
+ *  success : true
+ * }
+
+ *
+ * @apiError (500) Mongoose Error
+ * @apiError (404) Missing/WrongToken Fields
+ */
+
+router.delete('/courses/:cid', controller.delete);
+
 module.exports = router;
