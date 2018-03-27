@@ -21,6 +21,7 @@ class promotionsContent extends PureComponent {
 
 
     componentDidMount() {
+
         this.props.getListOfPromos();
     }
 
@@ -41,11 +42,13 @@ class promotionsContent extends PureComponent {
             <div align="center">
 
                 <InputLabel htmlFor={"promotions-simple"}>
-                    {this.props.selectedPromo ?  <h3>Veuiller selectionnez une promo</h3> : null}
+                    {this.props.promotions ?  <h3>Veuiller selectionnez une promo</h3> : null}
                 </InputLabel>
+
                 {this.props.promotions ?
+
                     <Select
-                        value =  {this.props.selectedPromo}
+                        value={this.props.selectedPromo ? this.props.selectedPromo.nomPromo:  ''}
                         onChange={this.handlePromoChange}
                         name="selectedPromo"
 
@@ -57,9 +60,8 @@ class promotionsContent extends PureComponent {
                         {this.props.promotions ? this.props.promotions.map(promo =>
                             <MenuItem key={promo._id}
                                 value={promo}>
-
                                 {promo.nomPromo}
-                            </MenuItem>) : ''
+                            </MenuItem>) : null
                         }
                     </Select> : null
                 }
@@ -72,7 +74,7 @@ class promotionsContent extends PureComponent {
                             key={cours._id}
                         />
                     )
-                    : ''}
+                    : null}
             </div>
         )
     }
