@@ -10,9 +10,10 @@ class StudentInfosBlock extends Component {
             <div style={{
                 borderRight: "1px solid black",
                 borderLeft: "1px solid black",
-                minWidth: "300px",
+                minWidth: "250px",
                 heigth: "100%",
-                boxSizing: "border-box"
+                boxSizing: "border-box",
+                
             }}>
                 <p>{this.props.student.nom}</p>
                 <p>{this.props.student.prenom}</p>

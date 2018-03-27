@@ -14,11 +14,18 @@ const styles = theme => ({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        height: "100%",
-        width: "100%",
+        margin: "0 auto",
+        borderRadius: "5px",
+        boxShadow: "4px -4px 4px 4px  #555",
+        width: "800px",
+
     },
     formElement: {
-        margin: "10px 0"
+        margin: "15px 0",
+    },
+
+    button:{
+        margin: "25px 0"
     }
 
 });
@@ -38,7 +45,7 @@ class CreateCourse extends Component {
                 <label className={classes.formElement}>
                     Intitulé du cours
                 </label>
-                <TextField name="name" placeholder="Intitulé du cours" onChange={this.handleInputChange}
+                <TextField style={{alignItem: "center"}}name="name" placeholder="Intitulé du cours" onChange={this.handleInputChange}
                            value={this.props.course.name}/>
 
                 <label className={classes.formElement}>
@@ -95,7 +102,7 @@ class CreateCourse extends Component {
                             onChange={this.handleEndHourChange}/>
 
 
-                <Button className={classes.formElement} variant="raised" color="primary" type="submit">Créer</Button>
+                <Button className={classes.button} variant="raised" color="primary" type="submit">Créer</Button>
 
             </form>
 

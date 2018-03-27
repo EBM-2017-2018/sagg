@@ -10,6 +10,7 @@ const styles = theme => ({
         display: "flex",
         flexDirection: "vertical",
         justifyContent: "center",
+        padding: "10px",
         alignItems: "center"
     }
 

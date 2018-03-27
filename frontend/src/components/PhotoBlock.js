@@ -11,6 +11,7 @@ const styles = theme => ({
         alignItems: "center",
         height: "100%",
         width: "100px",
+        padding: "10px"
 
 
     },

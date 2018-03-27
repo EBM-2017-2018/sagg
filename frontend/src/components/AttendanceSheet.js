@@ -8,9 +8,11 @@ import {changeCommentary, getPromo, toggleCheckbox, saveAttendanceSheet} from ".
 
 const styles = theme => ({
     root: {
-        width: "calc(100%-40px)",
-        margin: "0 40px",
-        boxShadow: "1px 1px 12px #555"
+        borderRadius: "5px",
+        boxShadow: "4px -4px 4px 4px  #555",
+        width: "1000px",
+
+        margin: "0 auto"
     },
 
     list: {
@@ -84,8 +86,13 @@ class AttendanceSheet extends Component {
 
     saveAttendanceSheet = () => {
         const courseId = this.props.course.courseId;
-        const attendees = {attendees : this.props.students.map(el => {return {
-            username: el.username, ishere: el.isAttending, comments: el.commentary}})};
+        const attendees = {
+            attendees: this.props.students.map(el => {
+                return {
+                    username: el.username, ishere: el.isAttending, comments: el.commentary
+                }
+            })
+        };
         this.props.saveAttendanceSheet(attendees, courseId);
     }
 
@@ -106,7 +113,7 @@ const mapDispatchToProps = dispatch => ({
     getPromo: (nomPromo) => dispatch(getPromo(nomPromo)),
     toggleCheckbox: (checkboxKey) => dispatch(toggleCheckbox(checkboxKey)),
     changeCommentary: (key, text) => dispatch(changeCommentary(key, text)),
-    saveAttendanceSheet:  (attendees, courseId) => dispatch(saveAttendanceSheet(attendees, courseId))
+    saveAttendanceSheet: (attendees, courseId) => dispatch(saveAttendanceSheet(attendees, courseId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(AttendanceSheet));
