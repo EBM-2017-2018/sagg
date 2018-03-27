@@ -122,7 +122,7 @@ class DetailCourses extends PureComponent {
                     width: "60px",
                     height: "60px",
                     color: "red",
-                    zIndex: "-1"
+                    zIndex: "100"
                 }} onClick={this.handleCloseClick}/>
 
                 <List>
