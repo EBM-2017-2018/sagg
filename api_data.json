@@ -288,7 +288,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\nsuccess : true\n}",
+          "content": "{\nsuccess : true,\nid: 8bd030299F020202\n}",
           "type": "json"
         }
       ]
