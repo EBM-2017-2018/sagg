@@ -41,7 +41,7 @@ class AttendanceSheet extends Component {
 
         return (
             <div className={classes.root}>
-                <ToastContainer/>
+                <ToastContainer autoClose={4000}/>
                 <header className={classes.header}>
                     <p style={{
                         width: "auto",
