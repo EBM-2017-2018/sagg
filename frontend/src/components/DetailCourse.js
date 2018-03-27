@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {
     AppBar,
-    Avatar,
+    Avatar, Button,
     Dialog,
     Divider,
     IconButton,
@@ -21,7 +21,8 @@ import UpdateIcon from 'material-ui-icons/Update';
 import PeopleIcon from 'material-ui-icons/People';
 import lightBlue from 'material-ui/colors/lightBlue';
 import moment from 'moment';
-import {apiRoute} from "../config/routes";
+import {HighlightOff} from 'material-ui-icons'
+import {apiRoute, testTokenProf} from "../config/routes";
 
 
 const styles = theme => ({
@@ -61,19 +62,48 @@ class DetailCourses extends PureComponent {
     };
 
     state = {
-        open: false,
+        commentOpen: false,
         memberDetail: {},
+        deleteOpen: false,
+        deleteText: "Supprimer",
+        isDeleted: false,
+
     }
     handleClickOpen = (param, e) => {
         this.setState({
-            open: true,
+            commentOpen: true,
             memberDetail: param
         });
     };
 
     handleClose = () => {
-        this.setState({open: false});
+        this.setState({commentOpen: false, deleteOpen: false});
     };
+
+    handleCloseClick = () => {
+        this.setState({deleteOpen: true});
+    }
+
+    delete = () => {
+        if (!this.state.isDeleted) {
+            fetch(`${apiRoute.sagg}promos/courses/${this.props.cours._id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': testTokenProf.access_token
+                }
+
+            })
+                .then((response) => console.log(response) || response.json())
+                .then(() => {
+                    this.setState({deleteText: "Terminer", isDeleted: true})
+                })
+        }
+        else {
+            this.setState({deleteText: "Supprimer"});
+            this.handleClose();
+        }
+
+    }
 
 
     render() {
@@ -81,7 +111,8 @@ class DetailCourses extends PureComponent {
         return (
             <div
                 style={{
-                    marginTop: '10px'
+                    marginTop: '10px',
+                    display: this.state.isDeleted ? "none" : "block"
                 }}
                 className={classes.root}>
                 <List>
@@ -114,7 +145,7 @@ class DetailCourses extends PureComponent {
                     </ListItem>
 
                 </List>
-                <div className={classes.row}>
+                <div className={classes.row} style={{display: "flex", flexWrap: "wrap"}}>
                     {this.props.cours.attendees ?
                         this.props.cours.attendees.map(e =>
                             <div key={"div" + e._id}
@@ -132,7 +163,7 @@ class DetailCourses extends PureComponent {
                         : ''}
                 </div>
                 <Dialog
-                    open={this.state.open}
+                    open={this.state.commentOpen}
                     onClose={this.handleClose}
                 >
                     <AppBar className={classes.appBar}>
@@ -168,6 +199,48 @@ class DetailCourses extends PureComponent {
                         </p>
                     </List>
                 </Dialog>
+
+                <HighlightOff style={{
+                    position: "absolute",
+                    right: "20px",
+                    marginTop: "-200px",
+                    width: "30px",
+                    height: "30px",
+                    color: "red"
+                }} onClick={this.handleCloseClick}/>
+                <Dialog
+                    open={this.state.deleteOpen}
+                    onClose={this.handleClose}>
+                    <AppBar className={classes.appBar}>
+                        <Toolbar>
+                            <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
+                                <CloseIcon/>
+                            </IconButton>
+                            <Typography variant="title" color="inherit" className={classes.flex}>
+                                {`${this.props.cours.title} date : ${moment(this.props.cours.start_time).format('DD-MM-YYYY HH:mm')}`}
+                            </Typography>
+                        </Toolbar>
+                    </AppBar>
+                    <div style={{width: "500px", height: "auto"}}>
+                        {!this.state.isDeleted ? <h3 style={{textAlign: 'center', margin: "5px 10px"}}>
+                            {`Voulez vous vraiment supprimer le cours ?`}
+                        </h3> : <h3 style={{textAlign: 'center', margin: "5px 10px"}}>Cours Supprimé</h3>}
+                        {!this.state.isDeleted ?
+                            <h4 style={{textAlign: 'center', margin: "5px 10px"}}>{`titre : ${this.props.cours.title}`}</h4> : null}
+                        {!this.state.isDeleted ? <h4 style={{
+                            textAlign: 'center',
+                            margin: "5px 10px"
+                        }}>{`date : ${moment(this.props.cours.start_time).format('DD-MM-YYYY HH:mm')}`}</h4> : null}
+
+                        <div style={{display: "flex", justifyContent: "flex-end"}}>
+                            {!this.state.isDeleted ?
+                                <Button variant="raised" onClick={this.handleClose}>Annuler</Button> : null}
+                            <Button variant="raised" color="primary"
+                                    onClick={this.delete}>{this.state.deleteText}</Button>
+                        </div>
+                    </div>
+                </Dialog>
+
             </div>
         );
     }
