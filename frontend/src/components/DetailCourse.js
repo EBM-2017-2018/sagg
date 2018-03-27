@@ -115,12 +115,24 @@ class DetailCourses extends PureComponent {
                     display: this.state.isDeleted ? "none" : "block"
                 }}
                 className={classes.root}>
+                <HighlightOff style={{
+                    position: "absolute",
+                    //marginTop: "10px",
+                    right: "20px",
+                    width: "60px",
+                    height: "60px",
+                    color: "red",
+                    zIndex: "100"
+                }} onClick={this.handleCloseClick}/>
+
                 <List>
+
                     <ListItem>
                         <Avatar>
                             <AssignmentIcon/>
                         </Avatar>
                         <ListItemText primary="Nom du cours" secondary={this.props.cours.title}/>
+
                     </ListItem>
                     <ListItem>
                         <Avatar>
@@ -133,9 +145,10 @@ class DetailCourses extends PureComponent {
                             <UpdateIcon/>
                         </Avatar>
                         <ListItemText primary="Dates"
-                                      secondary={`le ${moment(this.props.cours.start_time).format('DD/MM')}
-                  de ${moment(this.props.cours.start_time).format('HH:mm')} à 
-                  ${moment(this.props.cours.end_time).format('HH:mm')} `}/>
+                                      secondary={
+                                          `le ${moment(this.props.cours.start_time).format('DD/MM')}
+                                          de ${moment(this.props.cours.start_time).format('HH:mm')} à
+                                          ${moment(this.props.cours.end_time).format('HH:mm')} `}/>
                     </ListItem>
                     <ListItem>
                         <Avatar>
@@ -145,6 +158,7 @@ class DetailCourses extends PureComponent {
                     </ListItem>
 
                 </List>
+
                 <div className={classes.row} style={{display: "flex", flexWrap: "wrap"}}>
                     {this.props.cours.attendees ?
                         this.props.cours.attendees.map(e =>
@@ -200,14 +214,7 @@ class DetailCourses extends PureComponent {
                     </List>
                 </Dialog>
 
-                <HighlightOff style={{
-                    position: "absolute",
-                    right: "20px",
-                    marginTop: "-200px",
-                    width: "30px",
-                    height: "30px",
-                    color: "red"
-                }} onClick={this.handleCloseClick}/>
+
                 <Dialog
                     open={this.state.deleteOpen}
                     onClose={this.handleClose}>
@@ -226,7 +233,10 @@ class DetailCourses extends PureComponent {
                             {`Voulez vous vraiment supprimer le cours ?`}
                         </h3> : <h3 style={{textAlign: 'center', margin: "5px 10px"}}>Cours Supprimé</h3>}
                         {!this.state.isDeleted ?
-                            <h4 style={{textAlign: 'center', margin: "5px 10px"}}>{`titre : ${this.props.cours.title}`}</h4> : null}
+                            <h4 style={{
+                                textAlign: 'center',
+                                margin: "5px 10px"
+                            }}>{`titre : ${this.props.cours.title}`}</h4> : null}
                         {!this.state.isDeleted ? <h4 style={{
                             textAlign: 'center',
                             margin: "5px 10px"
