@@ -1,8 +1,18 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from 'material-ui';
-import {AppBar, Dialog, Divider, IconButton, List, ListItem, ListItemText, Toolbar, Typography} from 'material-ui';
-import {Avatar} from 'material-ui';
+import {
+    AppBar,
+    Avatar,
+    Dialog,
+    Divider,
+    IconButton,
+    List,
+    ListItem,
+    ListItemText,
+    Toolbar,
+    Typography,
+    withStyles
+} from 'material-ui';
 
 import SchoolIcon from 'material-ui-icons/School';
 import AssignmentIcon from 'material-ui-icons/Assignment';
@@ -11,6 +21,7 @@ import UpdateIcon from 'material-ui-icons/Update';
 import PeopleIcon from 'material-ui-icons/People';
 import lightBlue from 'material-ui/colors/lightBlue';
 import moment from 'moment';
+import {apiRoute} from "../config/routes";
 
 
 const styles = theme => ({
@@ -51,7 +62,7 @@ class DetailCourses extends PureComponent {
 
     state = {
         open: false,
-        memberDetail: {}
+        memberDetail: {},
     }
     handleClickOpen = (param, e) => {
         this.setState({
@@ -63,6 +74,7 @@ class DetailCourses extends PureComponent {
     handleClose = () => {
         this.setState({open: false});
     };
+
 
     render() {
         const {classes} = this.props;
@@ -105,22 +117,17 @@ class DetailCourses extends PureComponent {
                 <div className={classes.row}>
                     {this.props.cours.attendees ?
                         this.props.cours.attendees.map(e =>
-                            // fetch(`${apiRoute.linkapp}/pictures/file/${e.username}`, {
-                            //   method: 'GET',
-                            //   headers : {
-                            //     'Authorization': testTokenProf.access_token
-                            //    }
-                            // })
-                            // .then((response) => console.log(response) || response.json() )
-                            // .then(data => {
-                            //   console.log(data);
-                            // })
-                            <Avatar
-                                key={e._id}
-                                className={e.ishere ? classes.blueAvatar : classes.redAvatar}
-                                onClick={this.handleClickOpen.bind(this, e)}>
-                                {e.username ? e.username.substring(0, 1).toUpperCase() : ''}
-                            </Avatar>
+                            <div key={"div" + e._id}
+                                 style={{border: "1px solid black", borderRadius: "3px", margin: "2px"}}>
+                                <Avatar
+                                    key={e._id}
+                                    className={e.ishere ? classes.blueAvatar : classes.redAvatar}
+                                    onClick={this.handleClickOpen.bind(this, e)}>
+                                    {e.username ? e.username.substring(0, 1).toUpperCase() : ''}
+                                </Avatar>
+                                <img alt="" key={"img" + e._id} src={`${apiRoute.linkapp}pictures/file/${e.username}`}
+                                     style={{width: "30px", height: "30px"}}/>
+                            </div>
                         )
                         : ''}
                 </div>

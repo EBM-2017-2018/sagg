@@ -1,5 +1,4 @@
 import {apiRoute, testTokenProf} from "../config/routes";
-import { checkAuthResponse, getAuthHeaders } from 'ebm-auth/dist/browser';
 
 export function getCoursesHistory(promoId) {
     return function(dispatch) {
@@ -20,9 +19,13 @@ export function getListOfPromos(){
     return function (dispatch) {
         fetch(`${apiRoute.linkapp}promos/listpromoofresponsable`, {
             method: 'GET',
-            headers: getAuthHeaders(),
+            headers: {
+                'Authorization': testTokenProf.access_token
+            }
         })
-            .then(checkAuthResponse)
+
+            //.then(checkAuthResponse)
+
             .then(response => dispatch({type : "GET_LIST_OF_PROMOS", payload: response.json()}))
             .catch(error => dispatch({type: "GET_LIST_OF_PROMOS", payload: error}))
     }

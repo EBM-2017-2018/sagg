@@ -28,7 +28,6 @@ class AttendanceSheet extends Component {
 
 
     componentDidMount() {
-
         this.props.getPromo(this.props.course.promo);
     }
 
@@ -85,9 +84,9 @@ class AttendanceSheet extends Component {
 
     saveAttendanceSheet = () => {
         const courseId = this.props.course.courseId;
-        const attendees = this.props.students.map(el => {return {
-            username: el.username, ishere: el.isAttending, comments: el.commentary}})
-        saveAttendanceSheet(attendees, courseId);
+        const attendees = {attendees : this.props.students.map(el => {return {
+            username: el.username, ishere: el.isAttending, comments: el.commentary}})};
+        this.props.saveAttendanceSheet(attendees, courseId);
     }
 
 }

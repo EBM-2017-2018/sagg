@@ -21,37 +21,6 @@ export function toggleCourseForm(payload) {
     }
 }
 
-export function saveAttendanceSheet(attendanceSheet, courseId) {
-
-    return function (dispatch) {
-        dispatch({type: "SAVE_ATTENDANCE_SHEET"});
-
-
-        const url = `${apiRoute}promos/courses/${courseId}`
-
-
-        var settings = {
-            method: 'PUT',
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json',
-                'Authorization': testTokenProf.access_token,
-            },
-            mode: 'cors',
-            body: attendanceSheet
-        }
-
-
-        fetch(url, settings)
-            .then(function (response) {
-                dispatch({type: "SAVE_ATTENDANCE_SHEET", payload: response.json()})
-            })
-            .catch((err) => {
-                dispatch({type: "SAVE_ATTENDANCE_SHEET", payload: err})
-            })
-    }
-
-}
 
 export function getPromo(nomPromo) {
     return function (dispatch) {
@@ -162,4 +131,37 @@ export function getStudentInfo(username) {
                 dispatch({type: "GET_STUDENT_INFOS", payload: error})
             })
     }
+}
+
+export function saveAttendanceSheet(attendanceSheet, courseId) {
+
+    return function (dispatch) {
+        dispatch({type: "SAVE_ATTENDANCE_SHEET"});
+
+
+        const url = `${apiRoute.sagg}promos/courses/${courseId}`
+
+
+        var settings = {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+                'Authorization': testTokenProf.access_token,
+            },
+            mode: 'cors',
+            body: JSON.stringify(attendanceSheet)
+        }
+
+        console.log (attendanceSheet);
+
+        fetch(url, settings)
+            .then(function (response) {
+                dispatch({type: "SAVE_ATTENDANCE_SHEET", payload: response.json()})
+            })
+            .catch((err) => {
+                dispatch({type: "SAVE_ATTENDANCE_SHEET", payload: err})
+            })
+    }
+
 }

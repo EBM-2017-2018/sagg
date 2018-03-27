@@ -63,10 +63,9 @@ class App extends Component {
     }
 
     handleTabChange = (event, value) => {
-        console.log(event);
-        console.log(value);
+
         this.setState({tabSelected: value});
-        console.log(this.state);
+
     };
 }
 

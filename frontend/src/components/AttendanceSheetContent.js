@@ -11,7 +11,7 @@ import AttendanceSheet from "./AttendanceSheet";
 import {connect} from "react-redux"
 import {getPromos} from "../actions/promoActions";
 import {refreshToken} from "../actions/loginActions"
-import {saveAttendanceSheet, toggleAttendanceSheet, toggleButton, toggleCourseForm} from "../actions/attendanceActions"
+import {toggleAttendanceSheet, toggleButton, toggleCourseForm} from "../actions/attendanceActions"
 
 
 class AttendanceSheetContent extends PureComponent {
@@ -45,8 +45,6 @@ class AttendanceSheetContent extends PureComponent {
                     {this.props.attendanceSheetIsVisible ?
                         <AttendanceSheet reset={this.reset}/> : null}
 
-
-
                 </div>
             </MuiPickersUtilsProvider>
         )
@@ -70,11 +68,6 @@ class AttendanceSheetContent extends PureComponent {
         this.props.toggleAttendanceSheet(true);
     }
 
-    submit = () => {
-        //this.props.saveAttendanceSheet(this.props.attendanceSheet);
-        this.reset();
-    }
-
 
 }
 
@@ -92,7 +85,7 @@ const mapDispatchToProps = dispatch => ({
     toggleButton: (isVisible) => dispatch(toggleButton(isVisible)),
     toggleAttendanceSheet: (isVisible) => dispatch(toggleAttendanceSheet(isVisible)),
     toggleCourseForm: (isVisible) => dispatch(toggleCourseForm(isVisible)),
-    saveAttendanceSheet: (attendanceSheet) => dispatch(saveAttendanceSheet(attendanceSheet))
+
 })
 
 
