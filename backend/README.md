@@ -1,11 +1,11 @@
-Backend Boilerplate
+Backend Sagg
 ===================
 
-Ce dépôt contient le code pour le backend du projet Boilerplate.
+Ce dépôt contient le code pour le backend du projet Sagg.
 
-La documentation de l'API est écrite dans des commentaires [ApiDoc](http://apidocjs.com/), et compilée automatiquement par Travis à chaque push de la branche `master`. Elle est finalement accessible sur la branche `gh-pages`, ou directement à l'adresse https://EBM-2017-2018.github.io/EBM-boilerplate.
+La documentation de l'API est écrite dans des commentaires [ApiDoc](http://apidocjs.com/), et compilée automatiquement par Travis à chaque push de la branche `master`. Elle est finalement accessible sur la branche `gh-pages`, ou directement à l'adresse https://EBM-2017-2018.github.io/EBM-Sagg.
 
-## Après avoir copié ce boilerplate
+## Après avoir copié ce Sagg
 
 - Modifier le fichier [`package.json`](package.json) pour changer le nom du projet, et le nom et la "sampleUrl" utilisée comme base pour ApiDoc
 

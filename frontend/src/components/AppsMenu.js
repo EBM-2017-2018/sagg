@@ -1,9 +1,13 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {GridList, Popover, withStyles} from 'material-ui';
-
+import logoSagg from '../Images/logo-sagg.png';
+import logoOklm from '../Images/logo-oklm.png';
+import logoRedline from '../Images/logo-redline.png';
+import logoMarkus from '../Images/logo-markus.png';
+import logoClock from '../Images/logo-clock.png';
+import logoLinkapp from '../Images/logo-linkapp.png';
 import AppIcon from './AppIcon';
-import logo from '../logo.svg'
 
 const styles = theme => ({
     root: {
@@ -11,6 +15,7 @@ const styles = theme => ({
         width: 300,
         padding: '20px 15px',
         backgroundColor: theme.palette.background.paper,
+        
     }
 });
 
@@ -26,32 +31,32 @@ class AppsMenu extends PureComponent {
         {
             name: 'OKLM',
             url: '//oklm.ebm.nymous.io',
-            logo: logo
+            logo: logoOklm,
         },
         {
             name: 'Redline',
             url: '//redline.ebm.nymous.io',
-            logo: logo
+            logo: logoRedline,
         },
         {
             name: 'Linkapp',
             url: '//linkapp.ebm.nymous.io',
-            logo: logo
+            logo: logoLinkapp,
         },
         {
             name: 'Markus',
             url: '//markus.ebm.nymous.io',
-            logo: logo
+            logo: logoMarkus,
         },
         {
             name: 'SAGG',
             url: '//sagg.ebm.nymous.io',
-            logo: logo
+            logo: logoSagg,
         },
         {
             name: 'Livecoding',
             url: '//clock-livecoding.ebm.nymous.io',
-            logo: logo
+            logo: logoClock,
         }
     ];
 
