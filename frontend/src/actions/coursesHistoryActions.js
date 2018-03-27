@@ -29,6 +29,8 @@ export function getListOfPromos(){
 }
 
 export function changePromo(promo) {
+    console.log("ACTION")
+    console.log(promo)
     return {
         type: "PROMO_CHANGE",
         promo

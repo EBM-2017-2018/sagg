@@ -6,6 +6,7 @@ import DetailCourse from './DetailCourse';
 import {connect} from 'react-redux'
 
 import {changePromo, getCoursesHistory, getListOfPromos} from "../actions/coursesHistoryActions";
+import InputLabel from "material-ui/es/Input/InputLabel";
 
 
 class promotionsContent extends PureComponent {
@@ -24,12 +25,14 @@ class promotionsContent extends PureComponent {
     }
 
     handlePromoChange = (event) => {
-        const value = event.target.value;
-        console.log(value);
-        //const promoId = this.props.promotions.find(el => el.nomPromo = value)._id;
+        const promo = event.target.value;
+        console.log("handlePromoChange")
+        console.log(promo);
+        this.props.changePromo(promo);
 
-        //this.props.getCoursesHistory(promoId);
-        this.props.changePromo(value);
+        const promoId = promo._id;
+
+        this.props.getCoursesHistory(promoId);
     }
 
 
@@ -37,31 +40,13 @@ class promotionsContent extends PureComponent {
         return (
             <div align="center">
 
-                {/*<Select
-                    onChange={this.handlepromotionselect}
-                    value={this.props.selectedPromo._id}
-                    inputProps={{
-                        name: 'selectedCourse',
-                        id: 'promotions-simple',
-                    }}
-                    style={{
-                        width: '75%',
-                        textAlign: 'center'
-                    }}>
-
-                    {this.props.promotions ?
-                        this.props.promotions.map(option =>
-                            <MenuItem key={option._id}
-                                      value={option._id}>
-                                {option.nomPromo}
-                            </MenuItem>) : ''}
-                </Select>
-                */}
-
+                <InputLabel htmlFor={"promotions-simple"}>
+                    {this.props.selectedPromo ?  <h3>Veuiller selectionnez une promo</h3> : null}
+                </InputLabel>
                 {this.props.promotions ?
                     <Select
+                        value =  {this.props.selectedPromo}
                         onChange={this.handlePromoChange}
-                        value={this.props.selectedPromo.nomPromo}
                         name="selectedPromo"
 
                         style={{
@@ -71,12 +56,12 @@ class promotionsContent extends PureComponent {
 
                         {this.props.promotions ? this.props.promotions.map(promo =>
                             <MenuItem key={promo._id}
-                                //value={promo}>
-                            >
+                                value={promo}>
+
                                 {promo.nomPromo}
                             </MenuItem>) : ''
                         }
-                    </Select> : <h3>Veuillez choisir une promo</h3>
+                    </Select> : null
                 }
 
 
